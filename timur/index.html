@@ -9,7 +9,7 @@
   <meta property="og:description" content="Ремонт квартир под ключ с фиксированной сметой, поэтапной оплатой и ежедневными фотоотчётами.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="images/hero/01-painting.png">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -17,15 +17,15 @@
       theme: {
         extend: {
           colors: {
-            canvas: '#FFFFFF',
+            canvas: '#F5F5F0',
             card: '#FFFFFF',
             cream: '#F5F5F0',
             sage: '#D4DDD0',
-            surface: '#F5F5F5',
-            ink: '#000000',
-            muted: '#666666',
-            line: '#E8E8E8',
-            dark: '#000000',
+            surface: '#FFFFFF',
+            ink: '#111111',
+            muted: '#666662',
+            line: '#E2E2DC',
+            dark: '#111111',
             panel: '#1A1A1A',
             accent: '#FFB703',
             build: '#FFB703',
@@ -34,7 +34,7 @@
           },
           fontFamily: {
             sans: ['Inter', 'system-ui', 'sans-serif'],
-            mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+            display: ['Manrope', 'Inter', 'system-ui', 'sans-serif'],
           },
           maxWidth: { content: '1400px' },
         },
@@ -43,39 +43,65 @@
   </script>
   <style>
     :root {
-      --canvas: #FFFFFF;
+      --canvas: #F5F5F0;
       --card: #FFFFFF;
-      --ink: #000000;
-      --muted: #666666;
-      --line: #E8E8E8;
+      --ink: #111111;
+      --muted: rgba(17, 17, 17, 0.62);
+      --line: #E2E2DC;
       --accent: #FFB703;
       --accent-dark: #E5A503;
+      --radius-button: 8px;
+      --radius-card: 12px;
     }
     .text-accent { color: var(--accent); }
-    .btn-accent { display:inline-flex; align-items:center; gap:0.5rem; border:1px solid var(--accent); background:var(--accent); padding:0.625rem 1.35rem; font-size:0.8125rem; font-weight:600; color:var(--ink); border-radius:9999px; transition:opacity .2s, background .2s, border-color .2s; }
-    .btn-accent:hover { opacity:.9; background:var(--accent-dark); border-color:var(--accent-dark); }
-    .btn-accent:disabled { opacity:.45; cursor:not-allowed; }
-    .btn-accent.rounded-full { border-radius:9999px; text-transform:uppercase; letter-spacing:0.06em; font-size:0.75rem; font-weight:500; }
+    .btn-accent,
+    .btn-dark,
+    .btn-solid,
+    .btn-ghost {
+      /* !important защищает flex-центрирование от utility-классов block/flex */
+      display:inline-flex !important;
+      min-height:52px;
+      align-items:center;
+      justify-content:center;
+      gap:0.5rem;
+      padding:14px 28px;
+      border-radius:var(--radius-button);
+      box-sizing:border-box;
+      font-family:'Inter',system-ui,sans-serif;
+      font-size:0.75rem;
+      font-weight:700;
+      line-height:1;
+      letter-spacing:0.05em;
+      text-transform:uppercase;
+      text-decoration:none;
+      text-align:center;
+      white-space:nowrap;
+      transition:background-color .18s ease,border-color .18s ease,color .18s ease,transform .18s ease,box-shadow .18s ease;
+    }
+    .btn-accent { border:1px solid var(--accent); background:var(--accent); color:var(--ink); }
+    .btn-accent:hover { background:var(--accent-dark); border-color:var(--accent-dark); transform:translateY(-2px); box-shadow:0 6px 16px rgba(17,17,17,.14); }
+    .btn-accent:active { transform:translateY(0); box-shadow:none; }
+    .btn-accent:disabled { opacity:.45; cursor:not-allowed; transform:none; box-shadow:none; }
+    .btn-accent.rounded-full { border-radius:var(--radius-button); font-size:0.75rem; font-weight:700; }
     .label-accent { color:var(--accent); }
     .label,
     .project-modal__label {
-      font-family:'JetBrains Mono',ui-monospace,monospace;
-      font-size:13px;
-      font-weight:500;
+      font-family:'Inter',system-ui,sans-serif;
+      font-size:12px;
+      font-weight:600;
       text-transform:uppercase;
-      letter-spacing:0.12em;
+      letter-spacing:0.1em;
       color:var(--muted);
     }
-    .btn-dark, .btn-solid { display:inline-flex; align-items:center; gap:0.5rem; border:1px solid var(--ink); background:var(--ink); padding:0.625rem 1.35rem; font-size:0.8125rem; font-weight:500; color:#fff; border-radius:9999px; transition:opacity 0.2s; }
-    .btn-dark { border-radius:9999px; text-transform:uppercase; letter-spacing:0.06em; font-size:0.75rem; }
-    .btn-dark:hover, .btn-solid:hover { opacity:0.82; }
-    .btn-ghost { display:inline-flex; align-items:center; gap:0.5rem; border-radius:9999px; border:1px solid var(--line); background:transparent; padding:0.625rem 1.35rem; font-size:0.75rem; font-weight:500; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink); transition:all 0.2s; }
+    .btn-dark,.btn-solid { border:1px solid var(--ink); background:var(--ink); color:#fff; }
+    .btn-dark:hover,.btn-solid:hover { background:#2A2A2A; border-color:#2A2A2A; transform:translateY(-2px); }
+    .btn-ghost { border:1px solid var(--ink); background:transparent; color:var(--ink); }
     .btn-ghost:hover { border-color:var(--ink); background:var(--ink); color:#fff; }
-    .pill { border-radius:9999px; border:1px solid var(--line); background:transparent; padding:0.4rem 1.1rem; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); transition:all 0.2s; }
+    .pill { border-radius:var(--radius-button); border:1px solid var(--line); background:transparent; padding:0.65rem 1rem; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); transition:all 0.2s; }
     .pill.active { border-color:var(--ink); background:var(--ink); color:#fff; }
     .quiz-step { display:none; } .quiz-step.active { display:block; }
     .quiz-opts { display:flex; flex-wrap:wrap; gap:0.5rem; }
-    .quiz-opt { border-radius:9999px; border:1px solid var(--line); background:transparent; padding:0.55rem 1.15rem; font-size:0.8125rem; text-align:left; color:var(--ink); transition:all 0.2s; }
+    .quiz-opt { border-radius:var(--radius-button); border:1px solid var(--line); background:transparent; padding:0.75rem 1rem; font-size:0.8125rem; font-weight:500; text-align:left; color:var(--ink); transition:all 0.2s; }
     .quiz-opt:hover { border-color:var(--ink); }
     .quiz-opt.selected { border-color:var(--ink); background:var(--ink); color:#fff; }
     .calc-card { background:var(--card); border:1px solid var(--line); padding:2rem; }
@@ -117,35 +143,41 @@
     }
     .calc-area-quick { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1.25rem; }
     .calc-area-quick button {
-      border-radius:9999px; border:1px solid var(--line); background:transparent;
-      padding:0.45rem 0.95rem; font-size:0.8125rem; color:var(--ink); transition:all .2s;
+      border-radius:var(--radius-button); border:1px solid var(--line); background:transparent;
+      padding:0.65rem 0.95rem; font-size:0.8125rem; color:var(--ink); transition:all .2s;
     }
     .calc-area-quick button:hover { border-color:var(--ink); }
     .calc-area-quick button.is-active { border-color:var(--ink); background:var(--ink); color:#fff; }
     /* Главная кнопка перехода в Telegram */
     .calc-tg-btn {
-      display: inline-flex;
+      display: inline-flex !important;
       align-items: center;
       justify-content: center;
       width: 100%;
       max-width: 22rem;
       margin: 1.5rem auto 0;
-      padding: 1rem 1.25rem;
-      border-radius: 12px;
-      background: #24A1DE;
-      color: #fff;
-      font-size: 1rem;
-      font-weight: 600;
-      line-height: 1.35;
+      min-height: 52px;
+      padding: 14px 28px;
+      border: 1px solid var(--accent);
+      border-radius: var(--radius-button);
+      background: var(--accent);
+      color: var(--ink);
+      box-sizing: border-box;
+      font-size: 0.75rem;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
       text-decoration: none;
       text-align: center;
-      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 4px 14px rgba(36, 161, 222, 0.35);
+      white-space: normal;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
     }
     .calc-tg-btn:hover {
-      background: #1E8FC7;
-      transform: scale(1.03);
-      box-shadow: 0 6px 20px rgba(36, 161, 222, 0.45);
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(17,17,17,.14);
     }
     .calc-lead__legal {
       margin: 0.875rem auto 0;
@@ -396,7 +428,7 @@
         padding: 0.85rem 2rem;
       }
     }
-    .step-pill { width:2rem; height:2rem; border-radius:9999px; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); transition:all 0.2s; cursor:pointer; background:transparent; padding:0; }
+    .step-pill { width:2rem; height:2rem; border-radius:9999px; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-family:'Inter',system-ui,sans-serif; font-size:10px; font-weight:600; color:var(--muted); transition:all 0.2s; cursor:pointer; background:transparent; padding:0; }
     .step-pill:hover:not(.active):not(.is-disabled) { border-color:var(--ink); color:var(--ink); }
     .step-pill.active { background:var(--accent); border-color:var(--accent); color:var(--ink); }
     .step-pill.done { background:var(--ink); border-color:var(--ink); color:#fff; }
@@ -448,7 +480,7 @@
     .ba-slider__tag--before { left:12px; background:#fff; color:var(--ink); }
     .ba-slider__tag--after { right:12px; background:var(--accent); color:var(--ink); }
     .ba-slider__caption { margin-top:.75rem; font-size:.8125rem; color:var(--muted); }
-    .project-card { display:flex; flex-direction:column; overflow:hidden; width:100%; padding:0; border:1px solid var(--line); background:var(--card); text-align:left; font:inherit; color:inherit; cursor:pointer; touch-action:manipulation; -webkit-tap-highlight-color:transparent; transition:transform .18s ease, box-shadow .18s ease; will-change:transform; }
+    .project-card { display:flex; flex-direction:column; overflow:hidden; width:100%; padding:0; border:0; background:var(--card); text-align:left; font:inherit; color:inherit; cursor:pointer; touch-action:manipulation; -webkit-tap-highlight-color:transparent; transition:transform .18s ease; will-change:transform; }
     .project-card:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,.1); }
     .project-card.is-pressed,
     .project-card:active { transform:translateY(0) scale(.97); box-shadow:0 4px 14px rgba(0,0,0,.08); transition-duration:.08s; }
@@ -465,6 +497,8 @@
     .project-card__body { padding:1.25rem; display:flex; flex-direction:column; flex:1; }
     .project-card__meta { margin-top:.5rem; font-size:.75rem; color:var(--muted); }
     .project-card__btn { margin-top:1rem; width:100%; justify-content:center; font-size:10px; pointer-events:none; }
+    .project-card:hover .project-card__btn,
+    .project-card:focus-visible .project-card__btn { border-color:var(--ink); background:var(--ink); color:#fff; }
     .project-modal { position:fixed; inset:0; z-index:200; display:none; align-items:center; justify-content:center; padding:1rem; background:rgba(0,0,0,.88); backdrop-filter:blur(4px); overflow:hidden; overscroll-behavior:none; }
     .project-modal.is-open { display:flex; }
     .project-modal__panel { position:relative; width:100%; max-width:1100px; max-height:92vh; overflow:hidden; background:var(--canvas); }
@@ -582,45 +616,14 @@
       .project-modal__slide img { max-height:none; min-height:0; height:100%; }
       .project-modal__slide img.is-composite { max-height:100%; height:100%; }
     }
-    .project-modal__nav { display:none; pointer-events:none; z-index:210; }
     @media(min-width:900px){
       .project-modal {
-        --nav-gap:5px;
-        --nav-size:40px;
         --close-gap:5px;
         --close-size:40px;
         --panel-half:min(550px, 50vw - 1rem);
         --panel-half-h:min(46vh, 340px);
         overflow:visible;
       }
-      .project-modal__nav {
-        display:block;
-        position:absolute;
-        inset:0;
-        pointer-events:none;
-      }
-      .project-modal__nav button {
-        position:absolute;
-        top:50%;
-        width:var(--nav-size);
-        height:var(--nav-size);
-        transform:translateY(-50%);
-        pointer-events:auto;
-        background:var(--ink);
-        border:1px solid #fff;
-        box-sizing:border-box;
-        color:#fff;
-        font-size:18px;
-        cursor:pointer;
-        transition:background .2s, border-color .2s;
-      }
-      .project-modal__nav button:hover {
-        transform:translateY(-50%);
-        background:#000;
-        border-color:#fff;
-      }
-      #projectModalPrev { left:max(5px, calc(50% - var(--panel-half) + var(--slide-pad, 14px) - var(--nav-gap) - var(--nav-size))); }
-      #projectModalNext { left:min(calc(100% - var(--nav-size) - 5px), calc(50% + var(--panel-half) - var(--slide-pad, 14px) + var(--nav-gap))); }
     }
     .project-modal__pager { position:absolute; left:50%; transform:translateX(-50%); z-index:6; pointer-events:auto; opacity:0; transition:opacity .2s; }
     .project-modal__pager.is-ready { opacity:1; }
@@ -1006,12 +1009,12 @@
       align-items:center;
       text-align:center;
       padding:0.85rem 1.25rem;
-      font-weight:600;
+      font-weight:700;
     }
     .site-header__cta.btn-accent,
     .site-header__menu-cta.btn-accent {
-      text-transform:none;
-      letter-spacing:0.02em;
+      text-transform:uppercase;
+      letter-spacing:0.05em;
     }
     @media (min-width:768px) {
       .site-header__phone { display:inline-flex; }
@@ -1269,7 +1272,7 @@
     <section class="trust-strip" aria-label="Преимущества">
       <div class="hero-wide trust-strip__grid">
         <div><strong>10+ лет</strong><span>в ремонте квартир</span></div>
-        <div><strong>1 смета</strong><span>фиксируется в договоре</span></div>
+        <div><strong>Цена заранее</strong><span>фиксируем сумму в договоре</span></div>
         <div><strong>Каждый день</strong><span>фото и видеоотчёт</span></div>
         <div><strong>Поэтапно</strong><span>платите за выполненные работы</span></div>
       </div>
@@ -1287,7 +1290,7 @@
 
         <div id="portfolioGrid" class="reveal mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
 
-        <a href="#calculator" class="btn-accent rounded-full reveal mx-auto mt-16 block w-fit">Рассчитать похожий ремонт</a>
+        <a href="#calculator" class="btn-accent rounded-full reveal mx-auto mt-16 w-fit">Рассчитать похожий ремонт</a>
       </div>
     </section>
 
@@ -1295,10 +1298,6 @@
     <div id="projectModal" class="project-modal" role="dialog" aria-modal="true" aria-hidden="true">
       <div class="project-modal__close-stick">
         <button type="button" id="projectModalClose" class="project-modal__close" aria-label="Закрыть">✕</button>
-      </div>
-      <div class="project-modal__nav">
-        <button type="button" id="projectModalPrev" aria-label="Назад">←</button>
-        <button type="button" id="projectModalNext" aria-label="Вперёд">→</button>
       </div>
       <div class="project-modal__panel">
         <div class="project-modal__viewport" id="projectModalViewport">
@@ -1320,7 +1319,7 @@
             <span class="h-1.5 w-1.5 rounded-full bg-ink"></span>
             <span class="label">Калькулятор</span>
           </div>
-          <a href="#contacts" class="btn-ghost text-[11px]">Вызвать мастера ↗</a>
+          <a href="#contacts" class="btn-ghost">Бесплатный замер</a>
         </div>
 
         <div class="reveal">
@@ -1363,8 +1362,8 @@
           </div>
 
           <div class="calc-nav">
-            <button type="button" id="calcBack" class="btn-ghost hidden text-[11px]">← Назад</button>
-            <button type="button" id="calcAreaDone" class="btn-accent ml-auto hidden text-[11px]">Готово</button>
+            <button type="button" id="calcBack" class="btn-ghost hidden">Назад</button>
+            <button type="button" id="calcAreaDone" class="btn-accent ml-auto hidden">Готово</button>
           </div>
           </div>
 
@@ -1374,14 +1373,14 @@
             <p id="calcLeadText" class="calc-lead__text"></p>
 
             <a id="calcTgBtn" class="calc-tg-btn" href="#" target="_blank" rel="noopener noreferrer">
-              👉 Написать в Telegram
+              Получить расчёт в Telegram
             </a>
             <p class="calc-lead__legal">
               Нажимая на кнопку перехода в Telegram, вы подтверждаете своё согласие на обработку персональных данных в соответствии с
               <a href="legal/privacy-policy.html" target="_blank" rel="noopener noreferrer">Политикой конфиденциальности</a>.
             </p>
 
-            <button type="button" id="calcLeadRestart" class="btn-ghost calc-lead__restart mt-6 text-[11px]">Пройти заново</button>
+            <button type="button" id="calcLeadRestart" class="btn-ghost calc-lead__restart mt-6">Пройти заново</button>
           </div>
         </div>
       </div>
@@ -1531,7 +1530,7 @@
           </div>
           <div class="price-panel__grid" id="priceList"></div>
           <div class="pricing-cta reveal">
-            <a href="#calculator" class="btn-solid">Рассчитать стоимость</a>
+            <a href="#calculator" class="btn-accent">Рассчитать стоимость</a>
           </div>
         </div>
       </div>
@@ -1656,7 +1655,7 @@
       },
       {
         id: 'DM-K03',
-        title: 'Ремонт кухни в ЖК «Южный»',
+        title: 'Капитальный ремонт спальни 11 м²',
         building: 'ЖК «Южный»',
         area: '11 м²',
         days: '14 дней',
@@ -1666,9 +1665,9 @@
         after: 'images/portfolio/kitchen-black-after.png',
         cover: 'images/portfolio/kitchen-black-after.png',
         featured: false,
-        task: 'Замена напольного покрытия, установка матовых фасадов, столешницы из массива, встраиваемой техники и новой мойки с смесителем.',
+        task: 'Демонтаж старых покрытий, восстановление стен и пола, новая электрика, чистовая отделка, установка освещения и подготовка спальни к меблировке.',
         gallery: [
-          { room: 'Кухня', src: 'images/portfolio/kitchen-black-after.png' },
+          { room: 'Спальня', src: 'images/portfolio/kitchen-black-after.png' },
         ],
       },
     ];
@@ -2425,8 +2424,22 @@
     }
 
     function projectGalleryInnerHtml(p, idx = 0) {
-      const useSplitStack = !p.composite && p.before && p.after;
-      if (useSplitStack) return modalSplitStackHtml(p, false);
+      const hasBeforeAfter = !p.composite && p.before && p.after;
+      if (hasBeforeAfter) {
+        const beforePos = p.baAlign?.before || 'center center';
+        const afterPos = p.baAlign?.after || 'center center';
+        return `
+          <div class="project-modal__photo-viewer" data-photo-viewer>
+            <div class="project-modal__photo-stage">
+              <img class="project-modal__photo project-modal__photo--before is-active" src="${p.before}" alt="${p.title} — до ремонта" style="object-position:${beforePos}">
+              <img class="project-modal__photo project-modal__photo--after" src="${p.after}" alt="${p.title} — после ремонта" style="object-position:${afterPos}">
+            </div>
+            <div class="project-modal__photo-tabs" role="group" aria-label="Показать фотографию до или после ремонта">
+              <button type="button" class="project-modal__photo-tab is-active" data-photo-view="before">До ремонта</button>
+              <button type="button" class="project-modal__photo-tab" data-photo-view="after">После ремонта</button>
+            </div>
+          </div>`;
+      }
       const g = p.gallery[idx] || p.gallery[0];
       if (!g) return '';
       const isComposite = p.composite && g.src === p.composite;
@@ -2478,12 +2491,13 @@
       const pager = document.getElementById('projectModalPager');
       const viewport = document.getElementById('projectModalViewport');
       const gallery = document.querySelector(`.project-modal__project[data-physical-idx="${modalPhysicalIndex}"] .project-modal__gallery`);
+      const photoStage = gallery?.querySelector('.project-modal__photo-stage');
       if (!pager || !viewport || !gallery) return;
       const viewportRect = viewport.getBoundingClientRect();
       const galleryRect = gallery.getBoundingClientRect();
-      const galleryCenterX = galleryRect.left + galleryRect.width / 2 - viewportRect.left;
-      pager.style.top = `${Math.max(0, galleryRect.bottom - viewportRect.top - 34)}px`;
-      pager.style.left = `${galleryCenterX}px`;
+      const stageBottom = photoStage?.getBoundingClientRect().bottom || galleryRect.bottom - 64;
+      pager.style.top = `${Math.max(0, stageBottom - viewportRect.top + 22)}px`;
+      pager.style.left = `${galleryRect.left - viewportRect.left + 30}px`;
       pager.style.transform = 'translateX(-50%)';
       pager.style.bottom = 'auto';
       pager.classList.remove('is-scroll-hidden');
@@ -2598,22 +2612,6 @@
       requestAnimationFrame(positionModalPager);
     }
 
-    function modalSplitStackHtml(p, showTags = false) {
-      const beforePos = p.baAlign?.before || 'center center';
-      const afterPos = p.baAlign?.after || 'center center';
-      return `
-        <div class="project-modal__stack">
-          <div class="project-modal__stack-half">
-            <img src="${p.before}" alt="${p.title} — до" style="object-position:${beforePos}">
-            ${showTags ? '<span class="ba-slider__tag ba-slider__tag--before">До</span>' : ''}
-          </div>
-          <div class="project-modal__stack-half">
-            <img src="${p.after}" alt="${p.title} — после" style="object-position:${afterPos}">
-            ${showTags ? '<span class="ba-slider__tag ba-slider__tag--after">После</span>' : ''}
-          </div>
-        </div>`;
-    }
-
     function renderModalGallery(p, idx) {
       modalSlide = idx;
       modalProject = p;
@@ -2708,8 +2706,18 @@
 
     document.getElementById('projectModalClose').onclick = closeProjectModal;
     document.getElementById('projectModal').onclick = e => { if (e.target.id === 'projectModal') closeProjectModal(); };
-    document.getElementById('projectModalPrev').onclick = () => navigateModalProject(-1);
-    document.getElementById('projectModalNext').onclick = () => navigateModalProject(1);
+    document.getElementById('projectModalTrack').addEventListener('click', e => {
+      const tab = e.target.closest('[data-photo-view]');
+      if (!tab) return;
+      const viewer = tab.closest('[data-photo-viewer]');
+      const view = tab.dataset.photoView;
+      viewer.querySelectorAll('.project-modal__photo').forEach(photo => {
+        photo.classList.toggle('is-active', photo.classList.contains(`project-modal__photo--${view}`));
+      });
+      viewer.querySelectorAll('.project-modal__photo-tab').forEach(button => {
+        button.classList.toggle('is-active', button === tab);
+      });
+    });
 
     (function initProjectModalOverscrollLock() {
       const modal = document.getElementById('projectModal');
@@ -2768,7 +2776,7 @@
 
       function canStartSwipe(e) {
         if (!modalProject) return false;
-        return !e.target.closest('button, a, input, textarea, select, label, .project-modal__close, .project-modal__pager, .project-modal__nav');
+        return !e.target.closest('button, a, input, textarea, select, label, .project-modal__close, .project-modal__pager');
       }
 
       function getPoint(e) {
