@@ -11,6 +11,7 @@
   <meta property="og:image" content="images/hero/01-painting.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/breadcrumbs.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -933,7 +934,7 @@
       padding-left: max(1.25rem, 2.5vw);
       padding-right: max(1.25rem, 2.5vw);
     }
-    .nav-link { font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:0.14em; color:var(--muted); transition:color .2s; white-space:nowrap; }
+    .nav-link { display:inline-flex; align-items:center; font-size:11px; font-weight:500; line-height:1; text-transform:uppercase; letter-spacing:0.14em; color:var(--muted); transition:color .2s; white-space:nowrap; }
     .nav-link:hover { color:var(--ink); }
     .hero-mark { width:2rem; height:2rem; border-radius:9999px; border:1px solid var(--ink); flex-shrink:0; overflow:hidden; display:block; background:var(--surface); }
     .hero-mark img { width:100%; height:100%; object-fit:cover; object-position:50% 18%; }
@@ -942,8 +943,9 @@
       grid-template-columns:minmax(0, auto) 1fr minmax(0, auto);
       align-items:center;
       gap:clamp(12px, 2vw, 24px);
+      height:4rem;
       min-height:4rem;
-      padding-block:1rem;
+      padding-block:0;
     }
     .site-header__brand {
       display:inline-flex;
@@ -1233,6 +1235,10 @@
     </div>
   </header>
 
+  <div class="site-breadcrumbs-wrap hero-wide px-5 lg:px-10">
+    <nav class="site-breadcrumbs" data-breadcrumbs-root aria-label="Хлебные крошки"></nav>
+  </div>
+
   <main class="pt-[4rem]">
 
     <!-- 1. HERO -->
@@ -1295,7 +1301,7 @@
     </section>
 
     <!-- Модалка проекта -->
-    <div id="projectModal" class="project-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div id="projectModal" class="project-modal project-modal--editorial" role="dialog" aria-modal="true" aria-hidden="true">
       <div class="project-modal__close-stick">
         <button type="button" id="projectModalClose" class="project-modal__close" aria-label="Закрыть">✕</button>
       </div>
@@ -1624,6 +1630,7 @@
         building: 'ЖК «Зелёный квартал»',
         area: '12 м²',
         days: '24 дня',
+        totalCost: '1 130 000 ₽',
         workCost: '450 000 ₽',
         materialsCost: '680 000 ₽',
         before: 'images/portfolio/kitchen-emerald-before.png',
@@ -1641,6 +1648,7 @@
         building: 'Частный дом',
         area: '24 м²',
         days: '42 дня',
+        totalCost: '1 450 000 ₽',
         workCost: '850 000 ₽',
         materialsCost: '600 000 ₽',
         before: 'images/portfolio/living-before.png',
@@ -1658,14 +1666,17 @@
         title: 'Капитальный ремонт спальни 11 м²',
         building: 'ЖК «Южный»',
         area: '11 м²',
-        days: '14 дней',
+        days: '28 дней',
+        totalCost: '730 000 ₽',
         workCost: '320 000 ₽',
         materialsCost: '410 000 ₽',
         before: 'images/portfolio/kitchen-black-before.png',
         after: 'images/portfolio/kitchen-black-after.png',
         cover: 'images/portfolio/kitchen-black-after.png',
         featured: false,
-        task: 'Демонтаж старых покрытий, восстановление стен и пола, новая электрика, чистовая отделка, установка освещения и подготовка спальни к меблировке.',
+        afterLabel: 'После установки мебели заказчика',
+        furnitureNote: 'Мебель, текстиль и декор предоставлены заказчиком и в бюджет ремонта не входят.',
+        task: 'Демонтаж старых покрытий, восстановление стен и пола, новая электрика, чистовая отделка и установка освещения. После завершения работ заказчик самостоятельно установил мебель и добавил текстиль.',
         gallery: [
           { room: 'Спальня', src: 'images/portfolio/kitchen-black-after.png' },
         ],
@@ -2314,7 +2325,7 @@
               <span class="project-card__badge">${p.building}</span>
               <span class="project-card__badge">${p.area}</span>
               <span class="project-card__badge">${p.days}</span>
-              <span class="project-card__badge">${p.workCost}</span>
+              <span class="project-card__badge">Бюджет ${p.totalCost || p.workCost}</span>
             </div>
           </div>
           <div class="project-card__body">
@@ -2435,8 +2446,10 @@
               <img class="project-modal__photo project-modal__photo--after" src="${p.after}" alt="${p.title} — после ремонта" style="object-position:${afterPos}">
             </div>
             <div class="project-modal__photo-tabs" role="group" aria-label="Показать фотографию до или после ремонта">
+              <button type="button" class="project-modal__footer-nav project-modal__footer-nav--prev" data-project-nav="-1" aria-label="Предыдущий объект">←</button>
               <button type="button" class="project-modal__photo-tab is-active" data-photo-view="before">До ремонта</button>
               <button type="button" class="project-modal__photo-tab" data-photo-view="after">После ремонта</button>
+              <button type="button" class="project-modal__footer-nav project-modal__footer-nav--next" data-project-nav="1" aria-label="Следующий объект">→</button>
             </div>
           </div>`;
       }
@@ -2447,29 +2460,27 @@
     }
 
     function modalSidebarHtml(p, slideIdx = 0) {
-      const roomsBlock = p.gallery.length <= 1 ? '' : `
-          <p class="project-modal__label mt-6">Комнаты</p>
-          <div class="project-modal__rooms">
-            ${p.gallery.map((g, i) => `
-              <button type="button" class="project-modal__room ${i === slideIdx ? 'is-active' : ''}" data-idx="${i}">${g.room}</button>
-            `).join('')}
-          </div>`;
       return `
         <aside class="project-modal__sidebar">
           <div class="project-modal__head">
+            <p class="project-modal__eyebrow">Выполненный проект</p>
             <h3 class="project-modal__title">${p.title}</h3>
+            <p class="project-modal__price">${p.totalCost || p.workCost}</p>
+            <p class="project-modal__price-note">общий бюджет работ и материалов</p>
           </div>
           <div class="project-modal__stats">
             <div class="project-modal__stat"><span>ЖК / Тип дома</span><span>${p.building}</span></div>
             <div class="project-modal__stat"><span>Площадь</span><span>${p.area}</span></div>
             <div class="project-modal__stat"><span>Срок</span><span>${p.days}</span></div>
-            <div class="project-modal__stat"><span>Стоимость работ</span><span>${p.workCost}</span></div>
-            <div class="project-modal__stat"><span>Стоимость материалов</span><span>${p.materialsCost}</span></div>
+            <div class="project-modal__stat"><span>Работы</span><span>${p.workCost}</span></div>
+            <div class="project-modal__stat"><span>Материалы</span><span>${p.materialsCost}</span></div>
           </div>
-          <p class="project-modal__label mt-6">Задача</p>
-          <p class="project-modal__task">${p.task}</p>
-          ${roomsBlock}
-          <a href="#calculator" class="btn-accent rounded-full mt-6" onclick="closeProjectModal()">Рассчитать похожий ремонт</a>
+          <p class="project-modal__scope-note">${p.furnitureNote || 'Мебель, бытовая техника, текстиль и декор предоставлены заказчиком и в бюджет ремонта не входят.'}</p>
+          <div class="project-modal__description">
+            <p class="project-modal__label">Задача</p>
+            <p class="project-modal__task">${p.task}</p>
+          </div>
+          <a href="#calculator" class="btn-accent project-modal__cta" onclick="closeProjectModal()">Рассчитать похожий ремонт</a>
         </aside>`;
     }
 
@@ -2537,14 +2548,52 @@
     }
 
     function modalProjectCardHtml(p, slideIdx = 0) {
+      const photos = [];
+      const addPhoto = (src, label) => {
+        if (src && !photos.some(photo => photo.src === src)) photos.push({ src, label });
+      };
+      addPhoto(p.after || p.cover || p.composite, p.afterLabel || 'Готовый интерьер');
+      addPhoto(p.before, 'До ремонта');
+      (p.gallery || []).forEach(item => addPhoto(item.src, item.room || 'Детали проекта'));
+      addPhoto(p.composite, 'Обзор проекта');
+      const relatedProjects = PROJECTS.filter(project => project.id !== p.id);
+
       return `
-        <div class="project-modal__card">
-          <div class="project-modal__gallery">
-            <div class="project-modal__slide" data-idx="${slideIdx}">
-              ${projectGalleryInnerHtml(p, slideIdx)}
+        <div class="project-modal__page">
+          <div class="project-modal__card">
+            <div class="project-modal__gallery" aria-label="Фотографии проекта">
+              ${photos.map((photo, index) => `
+                <figure class="project-modal__gallery-item">
+                  <img src="${photo.src}" alt="${p.title} — ${photo.label.toLowerCase()}" loading="${index === 0 ? 'eager' : 'lazy'}">
+                  <figcaption>${photo.label}</figcaption>
+                </figure>
+              `).join('')}
             </div>
+            ${modalSidebarHtml(p, slideIdx)}
           </div>
-          ${modalSidebarHtml(p, slideIdx)}
+          ${relatedProjects.length ? `
+            <section class="project-modal__related" aria-labelledby="relatedProjectsTitle">
+              <div class="project-modal__related-head">
+                <p class="project-modal__eyebrow">Портфолио</p>
+                <h4 id="relatedProjectsTitle">Другие квартиры</h4>
+              </div>
+              <div class="project-modal__related-grid">
+                ${relatedProjects.map(project => {
+                  const image = project.after || project.cover || project.composite || project.before;
+                  return `
+                    <button type="button" class="project-modal__related-card" data-related-project="${project.id}">
+                      <span class="project-modal__related-media">
+                        <img src="${image}" alt="${project.title}" loading="lazy">
+                      </span>
+                      <span class="project-modal__related-copy">
+                        <strong>${project.title}</strong>
+                        <span>${project.area} · ${project.days}</span>
+                        <b>${project.totalCost || project.workCost}</b>
+                      </span>
+                    </button>`;
+                }).join('')}
+              </div>
+            </section>` : ''}
         </div>`;
     }
 
@@ -2631,7 +2680,6 @@
     }
 
     function openProjectModal(p, slideIdx = 0) {
-      const idx = getProjectIndex(p);
       const m = document.getElementById('projectModal');
       const firstOpen = !m.classList.contains('is-open');
 
@@ -2648,11 +2696,28 @@
         document.body.style.overflow = 'hidden';
       }
 
-      goToModalProject(idx, slideIdx, false);
+      modalProject = p;
+      modalTrackBuilt = false;
+      const track = document.getElementById('projectModalTrack');
+      track.innerHTML = `
+        <article class="project-modal__project">
+          ${modalProjectCardHtml(p, slideIdx)}
+        </article>`;
+      track.style.transform = 'none';
+      document.querySelector('.project-modal__panel').scrollTop = 0;
+      renderProjectBreadcrumbs(p);
+    }
 
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => refreshModalLayout());
-      });
+    function renderProjectBreadcrumbs(p) {
+      const root = document.querySelector('[data-breadcrumbs-root]');
+      if (!root) return;
+      root.innerHTML = `
+        <ol class="site-breadcrumbs__list">
+          <li class="site-breadcrumbs__item"><a href="../index.html">Станислав</a></li>
+          <li class="site-breadcrumbs__item"><a href="#top" onclick="closeProjectModal()">Ремонт квартир</a></li>
+          <li class="site-breadcrumbs__item"><a href="#portfolio" onclick="closeProjectModal()">Главная</a></li>
+          <li class="site-breadcrumbs__item"><span aria-current="page">${p.title}</span></li>
+        </ol>`;
     }
 
     function closeProjectModal() {
@@ -2676,6 +2741,7 @@
         pager.classList.remove('is-ready', 'is-scroll-hidden');
         pager.style.top = '';
       }
+      window.dispatchEvent(new Event('hashchange'));
     }
 
     function initProjectCard(card) {
@@ -2706,7 +2772,24 @@
 
     document.getElementById('projectModalClose').onclick = closeProjectModal;
     document.getElementById('projectModal').onclick = e => { if (e.target.id === 'projectModal') closeProjectModal(); };
+    document.querySelector('.site-header').addEventListener('click', e => {
+      if (e.target.closest('a[href^="#"]') && document.getElementById('projectModal').classList.contains('is-open')) {
+        closeProjectModal();
+      }
+    }, true);
     document.getElementById('projectModalTrack').addEventListener('click', e => {
+      const related = e.target.closest('[data-related-project]');
+      if (related) {
+        const project = PROJECTS.find(item => item.id === related.dataset.relatedProject);
+        if (project) openProjectModal(project);
+        return;
+      }
+      const nav = e.target.closest('[data-project-nav]');
+      if (nav) {
+        e.stopPropagation();
+        navigateModalProject(Number(nav.dataset.projectNav));
+        return;
+      }
       const tab = e.target.closest('[data-photo-view]');
       if (!tab) return;
       const viewer = tab.closest('[data-photo-viewer]');
@@ -2775,8 +2858,7 @@
       let activePointer = false;
 
       function canStartSwipe(e) {
-        if (!modalProject) return false;
-        return !e.target.closest('button, a, input, textarea, select, label, .project-modal__close, .project-modal__pager');
+        return false;
       }
 
       function getPoint(e) {
@@ -2933,5 +3015,6 @@
 
     document.onkeydown = e => { if (e.key === 'Escape') closeProjectModal(); };
   </script>
+  <script src="js/breadcrumbs.js" defer></script>
 </body>
 </html>

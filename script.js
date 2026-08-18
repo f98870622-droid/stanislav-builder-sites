@@ -81,6 +81,10 @@ let headerMorphRafId = 0;
 let lastHeaderMorphTickTime = 0;
 
 const clampMorph = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
+const smoothstepMorph = (value) => {
+  const clamped = clampMorph(value);
+  return clamped * clamped * (3 - 2 * clamped);
+};
 
 const getMorphTargetFromScroll = () =>
   window.scrollY > HEADER_COLLAPSE_THRESHOLD ? 1 : 0;
@@ -88,11 +92,15 @@ const getMorphTargetFromScroll = () =>
 const applyHeaderMorph = (value) => {
   const isMobile = window.matchMedia("(max-width: 1024px)").matches;
   const clamped = clampMorph(value);
-  const split = isMobile && !document.body.classList.contains("menu-open") ? clamped : 0;
+  const widthMorph = 1 - (1 - clamped) * (1 - clamped);
+  const slimMorph = smoothstepMorph((clamped - 0.06) / 0.82);
+  const radiusMorph = smoothstepMorph((clamped - 0.18) / 0.7);
+  const splitMorph = smoothstepMorph((clamped - 0.1) / 0.82);
+  const split = isMobile && !document.body.classList.contains("menu-open") ? splitMorph : 0;
 
-  document.documentElement.style.setProperty("--header-morph", clamped.toFixed(4));
-  document.documentElement.style.setProperty("--header-morph-slim", clamped.toFixed(4));
-  document.documentElement.style.setProperty("--header-morph-radius", clamped.toFixed(4));
+  document.documentElement.style.setProperty("--header-morph", widthMorph.toFixed(4));
+  document.documentElement.style.setProperty("--header-morph-slim", slimMorph.toFixed(4));
+  document.documentElement.style.setProperty("--header-morph-radius", radiusMorph.toFixed(4));
   document.documentElement.style.setProperty("--header-morph-split", split.toFixed(4));
 };
 
