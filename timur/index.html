@@ -719,24 +719,35 @@
         max-height:none;
         object-fit:cover;
       }
-      .project-modal__head {
-        height:calc(1.5rem * 1.15 * 2);
-        min-height:calc(1.5rem * 1.15 * 2);
-        max-height:calc(1.5rem * 1.15 * 2);
-      }
       .project-modal__title {
-        height:calc(1.5rem * 1.15 * 2);
-        min-height:calc(1.5rem * 1.15 * 2);
-        max-height:calc(1.5rem * 1.15 * 2);
         margin:0;
-        -webkit-line-clamp:2;
+        -webkit-line-clamp:3;
       }
-      .project-modal__stats { margin-top:.5rem; gap:0; }
+      .project-modal--editorial .project-modal__head {
+        height:auto;
+        min-height:0;
+        max-height:none;
+      }
+      .project-modal--editorial .project-modal__title {
+        height:auto;
+        min-height:0;
+        max-height:none;
+        display:block;
+        overflow:visible;
+        -webkit-line-clamp:unset;
+      }
+      .project-modal__stats { margin-top:1rem; gap:0.35rem; }
+      .project-modal--editorial .project-modal__stats { margin-top:1.5rem !important; gap:0.25rem; }
       .project-modal__stat {
-        min-height:2.75rem;
-        height:2.75rem;
-        padding-bottom:0;
+        min-height:3rem;
+        height:auto;
+        padding:0.75rem 0;
         box-sizing:border-box;
+        align-items:flex-start;
+      }
+      .project-modal--editorial .project-modal__stat {
+        min-height:3.25rem !important;
+        padding:0.85rem 0 !important;
       }
       .project-modal__stat:last-child { border-bottom:none; }
       .project-modal__sidebar { padding:1rem 1.25rem 1.25rem; }
@@ -973,14 +984,9 @@
       gap:clamp(0.5rem, 1.2vw, 1.25rem);
       min-width:0;
     }
-    .site-header__phone,
-    .site-header__cta {
+    .site-header__phone {
       display:none;
       flex-shrink:0;
-    }
-    .site-header__cta {
-      padding:0.5rem 0.95rem;
-      font-size:0.6875rem;
     }
     .site-header__burger {
       display:flex;
@@ -1013,7 +1019,6 @@
       padding:0.85rem 1.25rem;
       font-weight:700;
     }
-    .site-header__cta.btn-accent,
     .site-header__menu-cta.btn-accent {
       text-transform:uppercase;
       letter-spacing:0.05em;
@@ -1025,9 +1030,6 @@
     @media (min-width:768px) and (max-width:1023px) {
       .site-header__menu-cta { display:flex; }
     }
-    @media (min-width:1024px) {
-      .site-header__cta { display:inline-flex; }
-    }
     @media (min-width:1280px) {
       .site-header__nav { display:flex; }
       .site-header__burger { display:none; }
@@ -1036,7 +1038,6 @@
     }
     @media (min-width:1440px) {
       .site-header__nav .nav-link { font-size:11px; letter-spacing:0.14em; }
-      .site-header__cta { padding:0.625rem 1.35rem; font-size:0.75rem; letter-spacing:0.02em; }
     }
     @media (max-width:767px) {
       .site-header__menu-cta { display:flex; }
@@ -1211,7 +1212,6 @@
 
       <div class="site-header__actions">
         <a href="https://t.me/stanislav5621" target="_blank" rel="noopener noreferrer" class="site-header__phone nav-link">Написать в Telegram</a>
-        <a href="#contacts" class="site-header__cta btn-accent rounded-full">Бесплатный замер</a>
         <button id="menuBtn" class="site-header__burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenu">
           <svg id="iconOpen" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
           <svg id="iconClose" class="hidden h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -1601,11 +1601,6 @@
       </div>
     </section>
   </main>
-
-  <nav class="mobile-conversion-bar" aria-label="Быстрая связь">
-    <a href="https://t.me/stanislav5621" target="_blank" rel="noopener noreferrer" class="mobile-conversion-bar__call">Написать</a>
-    <a href="#contacts" class="mobile-conversion-bar__quote">Получить смету</a>
-  </nav>
 
   <footer class="site-footer bg-ink text-center text-xs text-white/60">
     <nav class="site-footer__legal mb-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2" aria-label="Юридические документы">

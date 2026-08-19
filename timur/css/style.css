@@ -1117,6 +1117,18 @@ main {
     max-width: none;
   }
 
+  .project-modal--editorial .project-modal__price {
+    margin-top: 1rem;
+  }
+
+  .project-modal--editorial .project-modal__price-note {
+    margin-bottom: 0.25rem;
+  }
+
+  .project-modal--editorial .project-modal__stat span:last-child {
+    line-height: 1.45;
+  }
+
   .project-modal__related {
     margin-top: 64px;
   }
@@ -1142,8 +1154,7 @@ main {
 .btn-dark:focus-visible,
 .btn-solid:focus-visible,
 .btn-ghost:focus-visible,
-.calc-tg-btn:focus-visible,
-.mobile-conversion-bar a:focus-visible {
+.calc-tg-btn:focus-visible {
   outline: 3px solid rgba(255, 183, 3, 0.42);
   outline-offset: 3px;
 }
@@ -1220,10 +1231,6 @@ main {
   line-height: 1.7;
 }
 
-.mobile-conversion-bar {
-  display: none;
-}
-
 @media (max-width: 900px) {
   .hero-sales {
     grid-template-columns: 1fr;
@@ -1263,10 +1270,6 @@ main {
 }
 
 @media (max-width: 640px) {
-  body {
-    padding-bottom: 4.25rem;
-  }
-
   .hero-bath__top {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
@@ -1320,41 +1323,5 @@ main {
 
   .process-card span {
     margin-bottom: 1.75rem;
-  }
-
-  .mobile-conversion-bar {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 80;
-    display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: 0.5rem;
-    padding: 0.6rem;
-    border-top: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.96);
-    backdrop-filter: blur(14px);
-  }
-
-  .mobile-conversion-bar a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 3rem;
-    border-radius: var(--radius-button);
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-decoration: none;
-  }
-
-  .mobile-conversion-bar__call {
-    border: 1px solid var(--ink);
-    color: var(--ink);
-  }
-
-  .mobile-conversion-bar__quote {
-    background: var(--accent);
-    color: var(--ink);
   }
 }
