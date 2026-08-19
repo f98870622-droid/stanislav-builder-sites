@@ -1319,9 +1319,15 @@ main {
 
   .process-card {
     min-height: 0;
+    padding: 2rem 1.75rem 2.25rem;
   }
 
   .process-card span {
-    margin-bottom: 1.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .process-card p {
+    margin-top: 1rem;
+    line-height: 1.7;
   }
 }

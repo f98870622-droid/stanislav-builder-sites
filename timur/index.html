@@ -460,7 +460,7 @@
       margin-right: auto;
     }
     /* Портфолио */
-    .ba-slider { position:relative; overflow:hidden; aspect-ratio:3/4; background:#fff; border:1px solid var(--line); cursor:ew-resize; user-select:none; touch-action:none; -webkit-touch-callout:none; transition:box-shadow .25s ease; }
+    .ba-slider { position:relative; overflow:hidden; aspect-ratio:3/4; background:#fff; border:1px solid var(--line); cursor:ew-resize; user-select:none; touch-action:pan-y; -webkit-touch-callout:none; transition:box-shadow .25s ease; }
     .ba-slider:hover { box-shadow:0 12px 40px rgba(0,0,0,.12); }
     .ba-slider__after { position:absolute; inset:0; overflow:hidden; }
     .ba-slider__before { position:absolute; inset:0; overflow:hidden; width:50%; z-index:2; }
@@ -500,6 +500,15 @@
     .project-card__btn { margin-top:1rem; width:100%; justify-content:center; font-size:10px; pointer-events:none; }
     .project-card:hover .project-card__btn,
     .project-card:focus-visible .project-card__btn { border-color:var(--ink); background:var(--ink); color:#fff; }
+    @media (hover:none) and (pointer:coarse) {
+      .project-card { touch-action:pan-y; will-change:auto; }
+      .project-card:hover,
+      .project-card:active,
+      .project-card.is-pressed { transform:none; }
+      .project-card:hover .project-card__media img,
+      .project-card:active .project-card__media img,
+      .project-card.is-pressed .project-card__media img { transform:none; }
+    }
     .project-modal { position:fixed; inset:0; z-index:200; display:none; align-items:center; justify-content:center; padding:1rem; background:rgba(0,0,0,.88); backdrop-filter:blur(4px); overflow:hidden; overscroll-behavior:none; }
     .project-modal.is-open { display:flex; }
     .project-modal__panel { position:relative; width:100%; max-width:1100px; max-height:92vh; overflow:hidden; background:var(--canvas); }
@@ -1173,6 +1182,17 @@
     .reveal-stagger.is-visible > .reveal-child:nth-child(5) { transition-delay:.6s; }
     .reveal-block.is-visible .reveal,
     .reveal-block.is-visible .reveal-stagger { transition-delay:.25s; }
+    .process-section,
+    .process-section .reveal-block,
+    .process-section .process-grid,
+    .process-section .process-card {
+      background-color:#111;
+    }
+    .process-section .reveal-block {
+      opacity:1;
+      transform:none;
+      filter:none;
+    }
     @media (prefers-reduced-motion: reduce) {
       .reveal, .reveal-block, .reveal-stagger > .reveal-child { opacity:1; transform:none; filter:none; transition:none; }
       html { scroll-behavior:auto; }
@@ -1295,8 +1315,6 @@
         <div id="featuredCompare" class="reveal mx-auto mt-12 w-full max-w-5xl"></div>
 
         <div id="portfolioGrid" class="reveal mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
-
-        <a href="#calculator" class="btn-accent rounded-full reveal mx-auto mt-16 w-fit">Рассчитать похожий ремонт</a>
       </div>
     </section>
 
@@ -2259,6 +2277,9 @@
       const handle = el.querySelector('.ba-slider__handle');
       const isSplit = el.classList.contains('ba-slider--split');
       let drag = false;
+      let touchAxis = '';
+      let touchStartX = 0;
+      let touchStartY = 0;
       const syncSplit = () => {
         if (!isSplit) return;
         const w = el.offsetWidth;
@@ -2289,14 +2310,33 @@
       };
       const start = e => {
         drag = true;
+        if (e.touches) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          touchAxis = '';
+          return;
+        }
         move(e);
       };
       const onMove = e => {
         if (!drag) return;
+        if (e.touches && !touchAxis) {
+          const dx = Math.abs(e.touches[0].clientX - touchStartX);
+          const dy = Math.abs(e.touches[0].clientY - touchStartY);
+          if (Math.max(dx, dy) < 8) return;
+          touchAxis = dx > dy ? 'x' : 'y';
+        }
+        if (touchAxis === 'y') {
+          drag = false;
+          return;
+        }
         if (e.cancelable) e.preventDefault();
         move(e);
       };
-      const end = () => { drag = false; };
+      const end = () => {
+        drag = false;
+        touchAxis = '';
+      };
       el.addEventListener('mousedown', e => { e.preventDefault(); start(e); });
       el.addEventListener('touchstart', start, { passive: true });
       window.addEventListener('mousemove', onMove);
@@ -2641,6 +2681,7 @@
       idx = ((idx % n) + n) % n;
       modalProject = PROJECTS[idx];
       modalSlide = slideIdx;
+      syncProjectHistory(modalProject);
       if (!modalTrackBuilt) {
         renderModalTrack(idx, slideIdx);
         return;
@@ -2683,11 +2724,9 @@
       return match ? decodeURIComponent(match[1]) : '';
     }
 
-    function syncProjectHistory(p, firstOpen) {
+    function syncProjectHistory(p) {
       if (projectIdFromLocation() === p.id) return;
-      const nextHash = projectHash(p.id);
-      if (firstOpen) history.pushState({ projectId: p.id }, '', nextHash);
-      else history.replaceState({ projectId: p.id }, '', nextHash);
+      history.pushState({ projectId: p.id }, '', projectHash(p.id));
     }
 
     function openProjectModal(p, slideIdx = 0, fromHistory = false) {
@@ -2718,7 +2757,7 @@
       track.style.transform = 'none';
       document.querySelector('.project-modal__panel').scrollTop = 0;
       renderProjectBreadcrumbs(p);
-      if (!fromHistory) syncProjectHistory(p, firstOpen);
+      if (!fromHistory) syncProjectHistory(p);
     }
 
     function renderProjectBreadcrumbs(p) {
