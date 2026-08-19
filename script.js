@@ -55,7 +55,7 @@ document.addEventListener("hero-enter-complete", () => {
 
 const TELEGRAM_USERNAME = "stanislav5621";
 const TELEGRAM_START_MESSAGE =
-  "Здравствуйте! Хочу сайт для строительной или ремонтной бригады. Подскажите, с чего лучше начать?";
+  "Станислав, здравствуйте! Хочу сайт для строительных или ремонтных услуг. Посмотрите мою задачу и подскажите, с чего начать.";
 
 const buildTelegramLink = (text = TELEGRAM_START_MESSAGE) =>
   `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(text)}`;
@@ -180,6 +180,24 @@ const updateHeaderMorph = () => {
   applyHeaderMorph(headerMorphValue);
   scheduleHeaderMorphTick();
 };
+
+const heroBuild = document.querySelector("[data-hero-build]");
+
+if (heroBuild) {
+  let heroBuildScrollRaf = 0;
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (heroBuildScrollRaf) return;
+      heroBuildScrollRaf = requestAnimationFrame(() => {
+        const shift = Math.min(28, Math.max(0, window.scrollY * 0.065));
+        heroBuild.style.setProperty("--build-shift", `${(-shift).toFixed(2)}px`);
+        heroBuildScrollRaf = 0;
+      });
+    },
+    { passive: true }
+  );
+}
 
 let headerMetricsReady = false;
 

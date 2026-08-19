@@ -2679,7 +2679,24 @@
       goToModalProject(next, 0, true, step);
     }
 
-    function openProjectModal(p, slideIdx = 0) {
+    function projectHash(id) {
+      return `#project/${encodeURIComponent(id)}`;
+    }
+
+    function projectIdFromLocation() {
+      const match = (window.location.hash || '').match(/^#project\/(.+)$/);
+      return match ? decodeURIComponent(match[1]) : '';
+    }
+
+    function syncProjectHistory(p, firstOpen) {
+      if (projectIdFromLocation() === p.id) return;
+      const nextHash = projectHash(p.id);
+      if (firstOpen) history.pushState({ projectId: p.id }, '', nextHash);
+      else history.replaceState({ projectId: p.id }, '', nextHash);
+    }
+
+    function openProjectModal(p, slideIdx = 0, fromHistory = false) {
+      if (!p) return;
       const m = document.getElementById('projectModal');
       const firstOpen = !m.classList.contains('is-open');
 
@@ -2706,6 +2723,7 @@
       track.style.transform = 'none';
       document.querySelector('.project-modal__panel').scrollTop = 0;
       renderProjectBreadcrumbs(p);
+      if (!fromHistory) syncProjectHistory(p, firstOpen);
     }
 
     function renderProjectBreadcrumbs(p) {
@@ -2720,8 +2738,13 @@
         </ol>`;
     }
 
-    function closeProjectModal() {
+    function closeProjectModal(fromHistory) {
+      const viaHistory = fromHistory === true;
       const m = document.getElementById('projectModal');
+      if (!m.classList.contains('is-open')) {
+        window.dispatchEvent(new Event('hashchange'));
+        return;
+      }
       m.classList.remove('is-open');
       m.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('project-modal-open');
@@ -2740,6 +2763,9 @@
       if (pager) {
         pager.classList.remove('is-ready', 'is-scroll-hidden');
         pager.style.top = '';
+      }
+      if (!viaHistory && projectIdFromLocation()) {
+        history.replaceState({ projectId: null }, '', window.location.pathname + window.location.search);
       }
       window.dispatchEvent(new Event('hashchange'));
     }
@@ -2948,6 +2974,26 @@
     })();
 
     renderPortfolio();
+
+    function restoreProjectFromLocation() {
+      const id = projectIdFromLocation();
+      if (!id) return;
+      const project = PROJECTS.find(item => item.id === id);
+      if (project) openProjectModal(project, 0, true);
+    }
+
+    window.addEventListener('popstate', () => {
+      const id = projectIdFromLocation();
+      if (id) {
+        const project = PROJECTS.find(item => item.id === id);
+        if (project) openProjectModal(project, 0, true);
+        else closeProjectModal(true);
+        return;
+      }
+      closeProjectModal(true);
+    });
+
+    restoreProjectFromLocation();
 
     (function initReviewsFeed() {
       const feed = document.getElementById('reviewsFeed');
