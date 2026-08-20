@@ -1653,7 +1653,7 @@ body.menu-open .site-footer {
   content: "";
   position: absolute;
   inset: 0;
-  background: #f5f5f0 url("mikhail-site-preview.png") top center / cover no-repeat;
+  background: #f5f5f0 url("mikhail-site-preview.png") top left / cover no-repeat;
   transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -1952,6 +1952,16 @@ body.menu-open .site-footer {
   max-width: min(720px, 100%);
 }
 
+.hero__eyebrow {
+  margin-bottom: 14px;
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
 .hero__block--pitch {
   display: flex;
   flex-direction: column;
@@ -2014,8 +2024,16 @@ body.menu-open .site-footer {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: min(280px, 100%);
+  width: min(320px, 100%);
   gap: 12px;
+}
+
+.hero__cta-note {
+  max-width: 48ch;
+  margin-top: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  line-height: 1.55;
 }
 
 .hero__actions .btn {
@@ -2084,9 +2102,9 @@ body.menu-open .site-footer {
 }
 
 .section-heading--center {
-  text-align: center;
-  max-width: 36rem;
-  margin-inline: auto;
+  max-width: 64rem;
+  margin-inline: 0;
+  text-align: left;
 }
 
 .section-heading__eyebrow {
@@ -2422,6 +2440,15 @@ body.menu-open .site-footer {
   margin-bottom: clamp(28px, 4vw, 40px);
 }
 
+.cases__intro {
+  max-width: 62ch;
+  margin: calc(clamp(28px, 4vw, 40px) * -0.45) 0 clamp(28px, 4vw, 40px);
+  color: var(--dim);
+  font-size: clamp(14px, 1.5vw, 16px);
+  line-height: 1.65;
+  text-align: left;
+}
+
 .cases--solo .section-heading__title {
   font-size: clamp(34px, 5vw, 56px);
   line-height: 1.02;
@@ -2480,7 +2507,10 @@ body.menu-open .site-footer {
 .cases__grid--solo .case-card__body {
   align-items: stretch;
   text-align: left;
-  padding: clamp(20px, 2.4vw, 28px) clamp(20px, 2.6vw, 32px);
+  padding:
+    clamp(20px, 2.4vw, 28px)
+    clamp(20px, 2.6vw, 32px)
+    24px;
   gap: 10px;
 }
 
@@ -2497,7 +2527,7 @@ body.menu-open .site-footer {
 
 .cases__grid--solo .case-card__actions {
   justify-content: flex-start;
-  margin-top: 10px;
+  margin-top: 14px;
   gap: 24px;
 }
 
@@ -3411,7 +3441,7 @@ body.menu-open .site-footer {
   .hero__actions {
     flex-direction: column;
     align-items: stretch;
-    width: min(280px, 100%);
+    width: min(320px, 100%);
   }
 
   .hero__actions .btn {
@@ -3531,6 +3561,11 @@ body.menu-open .site-footer {
 @media (max-width: 767px) {
   .section-heading--center {
     max-width: none;
+    margin-inline: 0;
+    text-align: left;
+  }
+
+  .cases__intro {
     margin-inline: 0;
     text-align: left;
   }
