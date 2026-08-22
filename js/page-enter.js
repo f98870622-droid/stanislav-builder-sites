@@ -39,6 +39,25 @@
       .map((line) => line.trim())
       .filter(Boolean);
 
+  const fitTypewriter = (container) => {
+    const title = container.closest(".hero__title");
+    if (!title) return;
+
+    title.style.fontSize = "";
+
+    const available = Math.floor(title.getBoundingClientRect().width) - 2;
+    if (available <= 0) return;
+
+    const longest = Array.from(
+      container.querySelectorAll(".hero-typewriter__line")
+    ).reduce((max, line) => Math.max(max, line.scrollWidth), 0);
+
+    if (!longest || longest <= available) return;
+
+    const current = parseFloat(getComputedStyle(title).fontSize);
+    title.style.fontSize = `${(current * available) / longest}px`;
+  };
+
   const buildTypewriterLayout = (container, revealAll = false) => {
     const lines = getTypewriterLines(container);
     const chars = [];
@@ -61,6 +80,8 @@
 
       container.appendChild(lineEl);
     });
+
+    fitTypewriter(container);
 
     return chars;
   };
@@ -174,9 +195,25 @@
     { passive: true }
   );
 
+  const observeTypewriterFit = () => {
+    const typewriter = document.querySelector(".hero-typewriter");
+    if (!typewriter || typeof ResizeObserver === "undefined") return;
+
+    let frame = 0;
+    const observer = new ResizeObserver(() => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => fitTypewriter(typewriter));
+    });
+
+    observer.observe(typewriter);
+    if (typewriter.parentElement) observer.observe(typewriter.parentElement);
+  };
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", boot);
   } else {
     boot();
   }
+
+  observeTypewriterFit();
 })();
