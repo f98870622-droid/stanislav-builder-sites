@@ -181,24 +181,6 @@ const updateHeaderMorph = () => {
   scheduleHeaderMorphTick();
 };
 
-const heroBuild = document.querySelector("[data-hero-build]");
-
-if (heroBuild) {
-  let heroBuildScrollRaf = 0;
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (heroBuildScrollRaf) return;
-      heroBuildScrollRaf = requestAnimationFrame(() => {
-        const shift = Math.min(28, Math.max(0, window.scrollY * 0.065));
-        heroBuild.style.setProperty("--build-shift", `${(-shift).toFixed(2)}px`);
-        heroBuildScrollRaf = 0;
-      });
-    },
-    { passive: true }
-  );
-}
-
 let headerMetricsReady = false;
 
 let lastHeaderHeightUpdate = 0;
