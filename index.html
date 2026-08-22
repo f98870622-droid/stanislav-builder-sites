@@ -46,8 +46,8 @@
       crossorigin
       href="https://fonts.gstatic.com/s/oswald/v57/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlWHYg.woff2"
     />
-    <link rel="stylesheet" href="./fonts-critical.css?v=20260822b" />
-    <link rel="stylesheet" href="./styles.css?v=20260822b" />
+    <link rel="stylesheet" href="./fonts-critical.css?v=20260822ac" />
+    <link rel="stylesheet" href="./styles.css?v=20260822ac" />
     <script>
       document.documentElement.classList.add("is-booting");
       if ("scrollRestoration" in history) history.scrollRestoration = "manual";
@@ -213,10 +213,7 @@
               <div class="hero__block hero__block--hook">
                 <p class="hero__eyebrow">Сайты для мастеров и ремонтных бригад</p>
                 <h1 id="hero-title" class="hero__title hero__title--prose">
-                  <span
-                    class="hero-typewriter"
-                    data-typewriter-source="Покажите заказчику работы&#10;и цены до первого звонка."
-                  ></span>
+                  Покажите заказчику работы и цены до первого звонка.
                 </h1>
               </div>
 
@@ -246,13 +243,19 @@
             </div>
             <div class="hero-build" data-hero-build>
               <article class="hero-case">
-                <div class="hero-case__browser" aria-hidden="true">
+                <div class="hero-case__browser">
                   <div class="hero-case__browser-bar">
                     <span class="hero-case__dots"><i></i><i></i><i></i></span>
                     <span class="hero-case__address">remont-mikhail.ru</span>
                     <span class="hero-case__secure">●</span>
                   </div>
-                  <div class="hero-case__viewport" role="img" aria-label="Главный экран сайта мастера по ремонту Михаила"></div>
+                  <img
+                    class="hero-case__shot"
+                    src="./mikhail-site-preview.png"
+                    alt="Сайт мастера по ремонту Михаила"
+                    width="1200"
+                    height="800"
+                  />
                 </div>
                 <div class="hero-case__meta">
                   <div>
@@ -261,12 +264,6 @@
                   </div>
                   <span class="hero-case__features">Портфолио · калькулятор · заявки</span>
                 </div>
-                <div class="hero-case__lead">
-                  <span class="hero-case__lead-dot"></span>
-                  <span><b>Новая заявка</b> на бесплатный замер</span>
-                  <time>сейчас</time>
-                </div>
-                <a class="hero-case__link" href="timur/index.html" aria-label="Открыть проект сайта Михаила"></a>
               </article>
             </div>
           </div>
@@ -298,16 +295,15 @@
 
           <div class="cases__grid cases__grid--solo">
             <article class="case-card">
-              <a class="case-card__media" href="./timur/index.html">
+              <a class="case-card__media case-card__media--sitefill" href="./timur/index.html">
                 <img
                   class="case-card__photo"
-                  src="./timur/images/hero/01-painting.png"
-                  alt="Михаил — ремонт квартир под ключ"
-                  width="7680"
-                  height="5120"
+                  src="./mikhail-site-preview.png"
+                  alt="Сайт Михаила — ремонт квартир под ключ"
+                  width="1920"
+                  height="1080"
                   loading="eager"
                 />
-                <span class="case-card__tag">Разработка с нуля</span>
               </a>
               <div class="case-card__body">
                 <p class="case-card__eyebrow">Кейс: ремонт квартир</p>
@@ -677,8 +673,9 @@
                 required
               />
               <span>
-                Согласен с
-                <a href="./privacy-policy.html">политикой обработки персональных данных</a>.
+                Нажимая кнопку, я даю согласие на обработку персональных данных
+                и принимаю
+                <a href="./privacy-policy.html">Политику конфиденциальности</a>.
               </span>
             </label>
 
@@ -721,7 +718,7 @@
       </div>
     </footer>
 
-    <script src="./js/page-enter.js?v=20260822b" defer></script>
-    <script src="./script.js?v=20260822b" defer></script>
+    <script src="./js/page-enter.js?v=20260822ac" defer></script>
+    <script src="./script.js?v=20260822ac" defer></script>
   </body>
 </html>

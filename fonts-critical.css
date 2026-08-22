@@ -96,24 +96,27 @@ h3,
 
 .hero__title,
 .hero__title--prose {
-  font-size: clamp(42px, 6.4vw, 76px);
+  font-size: clamp(52px, 7.8vw, 92px);
   font-weight: 700;
-  line-height: 1.06;
+  line-height: 0.98;
+  letter-spacing: -0.06em;
 }
 
 @media (max-width: 1280px) {
   .hero__title,
   .hero__title--prose {
-    font-size: clamp(36px, 5.8vw, 58px);
-    line-height: 1.08;
+    font-size: clamp(44px, 7vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.06em;
   }
 }
 
 @media (max-width: 640px) {
   .hero__title,
   .hero__title--prose {
-    font-size: clamp(30px, 8.2vw, 48px);
-    line-height: 1.06;
+    font-size: 50px;
+    line-height: 0.98;
+    letter-spacing: -0.06em;
   }
 }
 
