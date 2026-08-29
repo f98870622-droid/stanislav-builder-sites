@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МЛМ Революция 10.0</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<script>
+  function getParameterByName(name) {
+    const url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+    const results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+
+  ['utm_source', 'utm_medium', 'utm_campaign'].forEach(param => {
+    const value = getParameterByName(param);
+    if (value) {
+      localStorage.setItem(param, value);
+      console.log('Сохранено:', param, value); // Для отладки
+    } else {
+      console.log('Не найден:', param);
+    }
+  });
+</script>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo-container">
+                    <a href="index.html" class="logo-link">
+                        <img src="img/logo.svg" alt="Logo" class="logo">
+                    </a>
+                </div>
+            </div>
+            <div class="header-right">
+                <nav class="nav">
+                    <div class="nav-container">
+                        <a href="registration.html" class="nav-link">Регистрация</a>
+                        <a href="#program" class="nav-link">Программа</a>
+                        <a href="#speakers" class="nav-link">Спикеры</a>
+                    </div>
+                </nav>
+                <!-- Burger Menu -->
+                <div class="burger-menu">
+                    <button class="burger-button" id="burgerButton">
+                        <span class="burger-line"></span>
+                        <span class="burger-line"></span>
+                        <span class="burger-line"></span>
+                    </button>
+                    <div class="burger-nav" id="burgerNav">
+                        <a href="registration.html" class="burger-nav-link">Регистрация</a>
+                        <a href="#program" class="burger-nav-link">Программа</a>
+                        <a href="#speakers" class="burger-nav-link">Спикеры</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <main class="hero-section">
+            <div class="hero-left">
+                <div class="badges-container">
+                    <div class="badge-row animate-on-scroll">
+                        <div class="badge badge-solid badge-mlm animate-scale animate-delay-2">
+                            <span class="badge-text-large">МЛМ</span>
+                        </div>
+                        <div class="badge badge-outline animate-scale animate-delay-1">
+                            <span class="badge-text">Юбилейная</span>
+                        </div>
+                    </div>
+                    <div class="badge-row animate-on-scroll animate-delay-1">
+                        <div class="badge badge-solid badge-revolution animate-scale animate-delay-3">
+                            <span class="badge-text-large">РЕВОЛЮЦИЯ</span>
+                        </div>
+                    </div>
+                    <div class="badge-row animate-on-scroll animate-delay-2">
+                        <div class="badge badge-outline badge-description animate-scale animate-delay-5">
+                            <span class="badge-text-medium">Главная онлайн-конференция<br>по созданию и развитию<br>МЛМ-бизнеса в 2025 году</span>
+                        </div>
+                        <div class="badge badge-solid badge-version animate-scale animate-delay-4">
+                            <span class="badge-text-large">10.0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="mascot-container">
+                    <div class="mascot-bg">
+                        <div class="mascot-character">
+                            <img src="img/mascot_hero.png" alt="Mascot" class="mascot-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Opening Day Section -->
+        <section class="opening-section animate-on-scroll">
+            <div class="opening-content">
+                <div class="opening-left">
+                    <h2 class="opening-title animate-fade-left">Даты конференции</h2>
+                    <div class="opening-date-container animate-fade-left animate-delay-2">
+                        <div class="opening-date animate-scale animate-delay-3">
+                            <span class="date-text">17–21 ноября, 2025</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="opening-right">
+                    <div class="timer-container">
+                        <div class="timer-display">
+                            <div class="timer-item">
+                                <span class="timer-number" id="days">00</span>
+                                <span class="timer-label">дней</span>
+                            </div>
+                            <div class="timer-item">
+                                <span class="timer-number" id="hours">00</span>
+                                <span class="timer-label">часов</span>
+                            </div>
+                            <div class="timer-item">
+                                <span class="timer-number" id="minutes">00</span>
+                                <span class="timer-label">минут</span>
+                            </div>
+                            <div class="timer-item">
+                                <span class="timer-number" id="seconds">00</span>
+                                <span class="timer-label">секунд</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Automation Section -->
+        <section class="automation-section animate-on-scroll">
+            <div class="automation-header">
+                <h2 class="automation-title animate-fade-left">Новейшие методы продаж и рекрутинга</h2>
+                <div class="automation-subtitle animate-fade-right animate-delay-2">— все инструменты, проверенные на практике.</div>
+            </div>
+
+            <!-- Vimeo Video Section -->
+            <div class="video-section animate-on-scroll animate-delay-1">
+                <div class="video-container">
+                    <iframe
+                        src="https://kinescope.io/embed/uHFB4FFw9oDJYj7TuMJMcX"
+                        width="100%"
+                        height="100%"
+                        frameborder="0"
+                        allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+                    <!-- Free Participation Button After Changes Section -->
+            <div class="free-participation-container" style="margin: 40px auto; max-width: 600px; text-align: center;">
+                <button class="btn-black">Участвовать бесплатно</button>
+            </div>
+
+
+<div class="advantages-container animate-on-scroll animate-delay-3">
+                <div class="advantage-card animate-scale animate-delay-1">
+                    <div class="card-number">20+</div>
+                    <div class="card-text">спикеров-практиков</div>
+                </div>
+
+                <div class="advantage-card animate-scale animate-delay-2">
+                    <div class="card-number">5</div>
+                    <div class="card-text">дней практики</div>
+                </div>
+
+                <div class="advantage-card animate-scale animate-delay-3">
+                    <div class="card-number">20+</div>
+                    <div class="card-text">часов полезной информации</div>
+                </div>
+
+                <div class="advantage-card animate-scale animate-delay-4">
+                    <div class="card-icon">
+                        <img src="img/network.svg" alt="Network" class="network-icon">
+                    </div>
+                    <div class="card-text">бесплатное подключение через telegram или zoom</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Changes Section -->
+        <section class="changes-section animate-on-scroll">
+            <h2 class="changes-title animate-fade-left">Что изменится всего за 5 дней</h2>
+            <div class="changes-container animate-on-scroll animate-delay-2">
+                <div class="changes-cards">
+                    <div class="change-card animate-scale animate-delay-1">
+                        <div class="card-icon-wrapper">
+                            <img src="img/icon-1.svg" alt="Icon 1" class="card-icon-img">
+                        </div>
+                        <h3 class="card-title">У тебя появятся точные инструменты лидеров</h3>
+                        <p class="card-description">Овладеешь решениями, которые реально работают на МЛМ-рынке.</p>
+                    </div>
+
+                    <div class="change-card animate-scale animate-delay-2">
+                        <div class="card-icon-wrapper">
+                            <img src="img/icon-2.svg" alt="Icon 2" class="card-icon-img">
+                        </div>
+                        <h3 class="card-title">Ты увидишь реальные кейсы развития</h3>
+                        <p class="card-description">Познакомишься с подходами, которые дали результат топ-экспертам.</p>
+                    </div>
+
+                    <div class="change-card animate-scale animate-delay-3">
+                        <div class="card-icon-wrapper">
+                            <img src="img/icon-3.svg" alt="Icon 3" class="card-icon-img">
+                        </div>
+                        <h3 class="card-title">Внедришь цифровые автоворонки и ИИ</h3>
+                        <p class="card-description">Освоишь инструменты автоматизации — чат-боты, AI и современные воронки.</p>
+                    </div>
+
+                    <div class="change-card animate-scale animate-delay-4">
+                        <div class="card-icon-wrapper">
+                            <img src="img/icon-4.svg" alt="Icon 4" class="card-icon-img">
+                        </div>
+                        <h3 class="card-title">Получишь шаблоны и чек-листы для быстрого старта</h3>
+                        <p class="card-description">Все необходимые материалы для внедрения — без воды и лишней теории.</p>
+                    </div>
+
+                    <div class="change-card animate-scale animate-delay-5">
+                        <div class="card-icon-wrapper">
+                            <img src="img/icon-5.svg" alt="Icon 5" class="card-icon-img">
+                        </div>
+                        <h3 class="card-title">Прямо задашь вопросы спикерам</h3>
+                        <p class="card-description">Будет персональная обратная связь и живое сопровождение.</p>
+                    </div>
+
+                    <div class="change-card animate-scale animate-delay-6">
+                        <div class="card-icon-wrapper">
+                            <img src="img/icon-6.svg" alt="Icon 6" class="card-icon-img">
+                        </div>
+                        <h3 class="card-title">Появится ясность и мотивация двигаться дальше</h3>
+                        <p class="card-description">Сформируешь пошаговый план для роста команды и продаж.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Free Participation Button After Changes Section -->
+        <div class="free-participation-container" style="margin: 40px auto; max-width: 600px; text-align: center;">
+            <button class="btn-black">Зарегистрироваться</button>
+        </div>
+
+        <!-- Registration Banner Section -->
+        <section class="registration-banner">
+            <div class="banner-container">
+                <h2 class="banner-title">Зарегистрируйся и получи бонус — доступ к <span class="txt-area" >50+ топовых AI заготовок для нейросетей!</span></h2>
+                <div class="banner-content">
+                    <div class="banner-text">
+                        <div class="banner-description">
+                            <p><span class="gift-text-set">Экономь время:</span> добавь готовый prompt и получай результат от нейросети</p>
+                            <div class="card-description">
+                                <ul class="description-list">
+                                    <li>Промт для создания руководства по любой теме</li>
+                                    <li>Уточнение для улучшения существующего текста (добавление креатива)</li>
+                                    <li>Промпт для анализа профиля потенциального партнера в соцсетях</li>
+                                    <li>Промт для написания продающего поста о продукте: косметика, БАДы.</li>
+                                    <li>Промт для усиления копирайтерских способностей ChatGPT…</li>
+                                </ul>
+                            </div>
+                            <p class="">…и ещё десятки полезных дополнений!</p>
+                        </div>
+                    </div>
+                    <div class="banner-mascot">
+                        <img src="img/mascot-2.png" alt="Mascot" class="mascot-banner-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration Button -->
+        <div class="registration-button-container" style="margin-top: 20px; margin-bottom: 20px;">
+            <button class="btn-registration">Забрать бонус</button>
+        </div>
+    </div>
+
+    <!-- Speakers Section -->
+    <section class="speakers-section animate-on-scroll" id="speakers">
+        <div class="container">
+            <h2 class="speakers-title animate-fade-left">Главная онлайн-конференция для сетевиков:</h2>
+            <p class="speakers-description animate-fade-left animate-delay-1">Как продавать, рекрутировать и обучать с помощью ИИ — просто, <br> по-человечески и без страха.</p>
+            <p class="speakers-description animate-fade-left animate-delay-2 gift-text-set">Знакомьтесь с теми, кто поможет войти в новую эру рекрутинга и продаж.</p>
+
+            <div class="speakers-container animate-on-scroll animate-delay-3">
+                <div class="speakers-row">
+
+                    <div class="speaker-card animate-scale animate-delay-1">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Оксана-Смирнова.jpg" alt="Спикер 4" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Оксана Смирнова</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>12 лет в сетевом бизнесе с опытом работы онлайн</li>
+                                        <li>За первый месяц закрыла 6 квалификаций и забрала автобонус</li>
+                                        <li>Рекордный прирост в обороте на 6 млн. рублей за 2 месяца благодаря трём простым инструментам</li>
+                                        <li>ТОП-лидер с командой более 10 тыс человек</li>
+                                        <li>Выступала на аудиторию более 400 человек - онлайн и офлайн </li>
+                                        <li>Посетила 19 стран мира благодаря сетевому маркетингу</li>
+                                        <li>Заработала рекордные 12 млн руб в 2025 году</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="speaker-card animate-scale animate-delay-1">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Александр-шубин.jpg" alt="Спикер 1" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Алексей Шубин</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>18 лет в продажах, экс-зам. директора в Черкизово</li>
+                                        <li>4 года в сетевом, действующий лидер МЛМ компании</li>
+                                        <li>Спикер и организатор событий до 2 000 человек</li>
+                                        <li>Автор системы рекрутинга через Telegram</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="speakers-row animate-on-scroll animate-delay-4">
+                <div class="speaker-card animate-scale animate-delay-3">
+                    <div class="speaker-content">
+                          <img src="img/speaker/Валентин-Войнов.jpg" alt="Спикер 3" class="speaker-image">
+                        <div class="speaker-info">
+                            <h3 class="speaker-name">Валентин Войнов</h3>
+                            <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>Бессменный Первый чек международной МЛМ компании в течение 15 лет</li>
+                                        <li>Идеолог и организатор международных научных конференций ProMito для врачей и специалистов</li>
+                                        <li>Идеолог и автор проекта по внедрению Центров знаний митохондрильного здоровья на базе клиник с государственной поддержкой для собственников и управленцев бизнеса</li>
+                                        <li>Успешный бизнесмен со стажем более 30 лет</li>
+                                        <li>Автор 12 Систем для MLM - предпринимателей</li>
+                                        <li>Профессиональный стратег</li>
+                                    </ul>
+                            </div>
+                         </div>D
+                    </div>
+                </div>
+                    <div class="speaker-card animate-scale animate-delay-1">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Гульшат-Мустафина.png" alt="Спикер 4" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Гульшат Мустафина</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>Самый высокий ранг в своей компании</li>
+                                        <li>Все топовые квалификации за 3 года</li>
+                                        <li>35000+ человек в команде</li>
+                                        <li>Доход команды ~40 млн</li>
+                                        <li>18 лет в сетевом</li>
+                                        <li>Номинант в сетевом Оскаре</li>
+                                        <li>Самая влиятельная женщина в сетевом в 2025 году</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="speakers-row animate-on-scroll animate-delay-4">
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/АЛТЫНАЙ-КАПАЛБАЕВА.jpg" alt="Спикер 5" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Алтынай Капалбаева</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>Дипломированный практикующий психолог, магистрант Московского Института Психоанализа</li>
+                                        <li>Создатель 50+ трансформационных курсов, изменивших мышление 20 000+ учеников по всему миру</li>
+                                        <li>Сертифицированный учитель медитаций Вихангам Йоги </li>
+                                        <li>Посещала 30+ святых мест по всему миру и набиралась опыта у профессиональных духовных наставников</li>
+                                        <li>Создатель методик “Код денежной емкости”, “Код личности”, “Код любви к себе”, “Кармическая Задача Души</li>
+                                        <li>Автор книги “Код денежной емкости"</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Алесандр-Скиба.jpg" alt="Спикер 2" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Александр Скиба</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li> За 16 лет в сетевом бизнесе:</li>
+                                        <li>5 лет продуктовый спикер компании: более 4000 презентационных часов</li>
+                                        <li>2 года антикризисный Региональный Представитель. В двух регионах удвоил продажи и рекрутирование </li>
+                                        <li>5 000+ партнеров стали участниками тренингов и обучений. В копилке 20 обучений для MLM</li>
+                                        <li>Автор курса «Ускорение Бизнеса»</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="speaker-card animate-scale animate-delay-3">
+                        <div class="speaker-content">
+                            <img src="img/speacker-2.png" alt="Спикер 6" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Юлия Авштолис</h3>
+                                <p class="speaker-description">Продюсер крупнейших конференций. Сооснователь проектов</p>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+
+                <div class="speakers-row animate-on-scroll animate-delay-4">
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Татьяна-дитман.png" alt="Спикер 5" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Татьяна Дитман</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>Предприниматель более 20 лет.</li>
+                                        <li>Эксперт в MLM и партнерских программах.</li>
+                                        <li>Лайф коуч, наставник, бизнес практик.</li>
+                                        <li>Команда более 25 тысяч человек.</li>
+                                        <li>За 2 года вырастила более 100 миллионеров.</li>
+                                        <li>Амбассадор финансовой грамотности.</li>
+                                        <li>Мастер работы с подсознанием, автор Фокус-группы «Любой может стать любым»</li>
+                                        <li>Топ-100 бизнес эксперт в России.</li>
+                                        <li>Публикация Forbes Club. Мама-продюссер.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Вера Ориенс.png" alt="Спикер 2" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Вера Ориенс</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>Психотехнолог, философ, коуч, Исследователь возможностей сознания</li>
+                                        <li>Идеолог системы саморазвития "Сефиротика"</li>
+                                        <li>Предприниматель и инвестор</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="speakers-row animate-on-scroll animate-delay-4">
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Евгений-Щелконогов.png" alt="Спикер 5" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Евгений Щелконогов</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>Бизнесмен с оборотом более 1 млрд. рублей</li>
+                                        <li>Основатель и Председатель Правления Корпорации “AuniteGroup”, “Austore.ru”, клуба «Наставник» и «Академии лидеров»</li>
+                                        <li>Спикер международных конференций. Выступал в Сан-Франциско, Сингапуре, Сеуле, Токио, Дубае, Берлине, Астане, Анталии, Москве, Санкт-Петрбурге, Казани, Сочи.</li>
+                                        <li>Участник панельных дискуссий</li>
+                                        <li>Эксперт в области вирусного маркетинга</li>
+                                        <li>Построил структуру более 60 000 партнеров</li>
+                                        <li>Опыт предпринимательской деятельности более 25 лет, в сферах строительства, автомобильного бизнеса, производства, общественного питания и млм</li>
+                                        <li>Эксперт, инфобизнесмен, инвестор, стартапер - запустил более 50 собственных проектов</li>
+                                        <li>⁠Написал 3 книги. Автор 4х обучающих курсов</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Юлия-Лелеко.png" alt="Спикер 2" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Юлия Лелеко</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>Более 10 лет в МЛМ-бизнесе на топовых позициях.</li>
+                                        <li>За 8 месяцев стала самым быстрорастущим лидером компании, а через полтора года — № 1 в стране.</li>
+                                        <li>Взяла все бонусы и премии, став единственной, кто сделал это в первый год.</li>
+                                        <li>Вырастила сотни лидеров.</li>
+                                        <li>Создала онлайн-школу и агентство по запуску МЛМ-предпринимателей и экспертов под ключ</li>
+                                        <li>Тренер, наставник и продюсер</li>
+                                        <li>Автор метода «Нейроворонка продаж. Поток заявок», который помогает</li>
+                                        <li>Стабильный доход 2–3 млн ₽ в месяц</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="speakers-row animate-on-scroll animate-delay-4">
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Варлам-Григорян.png" alt="Спикер 5" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Варлам Григорян</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>Октябрь 2025 года - стал обладателем премии «Сетевой Оскар»</li>
+                                        <li>Номер один в России и СНГ в международной трёхмиллиардной компании прямых продаж</li>
+                                        <li>За 3 года вышел в топ-4 мира среди миллиона партнёров</li>
+                                        <li>Объём продаж команды составляет более 5 миллионов долларов за месяц.</li>
+                                        <li>Сегодня в команде более 40 семей, которые зарабатывают от 6 000 до 50 000 долл. в месяц. Более 400 людей/семей стабильно зарабатывают 700-1 000 долл. и выше.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Всеволод-Татаринов.png" alt="Спикер 2" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Всеволод Татаринов</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>34 года бизнес-практики</li>
+                                        <li>Президент API (Ассоциации профессиональных интернет-предпринимателей)</li>
+                                        <li>Действующий предприниматель, бизнес-стратег</li>
+                                        <li>Эксперт в области наставничества</li>
+                                        <li>Помог 452 предпринимателям стать миллионерами</li>
+                                        <li>Лектор Российского общества «Знание»</li>
+                                        <li>Общественный деятель и просветитель в области бизнес-образования</li>
+                                        <li>Основатель обучающего сообщества SunTeam International с 1998 года</li>
+                                        <li>Лицензии  на осуществление образовательной деятельности Nº 16-10/5576</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="speakers-row animate-on-scroll animate-delay-4">
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/яровые.png" alt="Спикер 5" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Артем и Ольга Яровые</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>20 лет на рынке МЛМ</li>
+                                        <li>Вышли из долга 54 тыс. долл. на доход 100 000 долл. в месяц</li>
+                                        <li>Помогли 15 000+ партнерам стать успешными</li>
+                                        <li>Артём за 3,5 года в своей сетевой Компании пробил планку дохода $115.000 в месяц</li>
+                                        <li>Ольга вышла на чек $115.000 в месяц за 3,5 года</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Ольга-Бутакова.png" alt="Спикер 2" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Ольга Бутакова</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>Топ-лидер Международной  МЛМ-компании. Член международного лидерского совета.</li>
+                                        <li>Эксперт интеллектуального ядра NetworkExpert</li>
+                                        <li>Профессиональный опыт в МЛМ - более 6 лет</li>
+                                        <li>Опыт в управлении и финансах - более 27 лет</li>
+                                        <li>Международная Структура более 70000 участников в 44 странах Мира.</li>
+                                        <li>Более 500 партнеров  в команде в лидерской квалификации с чеком от 100000 до 2000000 рублей в месяц</li>
+                                        <li>Организатор MLM - марафонов и интенсивов</li>
+                                        <li>Основатель  Базовой Онлайн-школы для  МЛМ предпринимателей</li>
+                                        <li>Организатор, спикер и ведущая международных конференций и  мероприятий</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="speakers-row animate-on-scroll animate-delay-4">
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Бабинцев.png" alt="Спикер 5" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Алексей Бабинцев</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>25 лет в сетевом бизнесе</li>
+                                        <li>Долларовый миллионер в МЛМ</li>
+                                        <li>5 лет президент сетевой компании</li>
+                                        <li>Имеет несколько образований: химик-лаборант, химик-технолог, биохимик, управленец</li>
+                                        <li>Ведущий аналитик сетевой индустрии в России</li>
+                                        <li>Специалист по маркетинг планам и расчетам</li>
+                                        <li>Автор 2 книг и множества статей про МЛМ бизнес</li>
+                                        <li>Резидент сообществ «Деловая Россия Москва» и «Экосистема Омбудсмена Москва»</li>
+                                        <li>Спикер МОС МШУ при аппарате омбудсмена в Москве</li>
+                                        <li>Много поясов по единоборствам</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Всехвятский.png" alt="Спикер 2" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Сергей Всехсвятский</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>Один из первооткрывателей МЛМ в России</li>
+                                        <li>Высший ранг в международной сетевой компании, член Клуба Основателей рынка Евразии</li>
+                                        <li>Организация 65.000 человек в 50 странах мира</li>
+                                        <li>Создатель проекта SvobodaPRO</li>
+                                        <li>30 лет в бизнесе МЛМ</li>
+                                        <li>25 лет опыта аналитика, спикера, консультанта и тренера в сетевой индустрии</li>
+                                        <li>Автор и ведущий психологических тренингов в России, США, Австралии и Европе</li>
+                                        <li>Опыт долгосрочного сотрудничества с Lambre, CielParfume, Дэнас МС, Gloryon, Родник Здоровья, Центр Регион, АссисТАС, МИРРА</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="speakers-row animate-on-scroll animate-delay-4">
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Санников.png" alt="Спикер 5" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Станислав Санников</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>Высшее психологическое образование</li>
+                                        <li>С 2001 года в бизнесе прямых продаж и МЛМ</li>
+                                        <li>Первый миллион рублей в 20 лет</li>
+                                        <li>Первый миллион долларов в 22 года</li>
+                                        <li>Стал Советником Президента своей компании в 2006 и 2015 году</li>
+                                        <li>Премии «Золотое перо», MLM-Оскар, «Прорыв года»</li>
+                                        <li>Организатор форумов</li>
+                                        <li>Участник тренингов GoPro Recruiting Mastery в Лас-Вегасе и UPW Тони Роббинса в Сингапуре</li>
+                                        <li>Соучредитель информационного портала Network Expert</li>
+                                        <li>Организатор NetCon и других конференций</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Ещенко.png" alt="Спикер 2" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Елена Ещенко</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>Оперная певица - 17+ лет в профессии, лауреат международных конкурсов</li>
+                                        <li>Партнер творческих объединений "Alex Tursk" и "Alfa Production"</li>
+                                        <li>Модель, cнималась в том числе для рекламы продукции компании "Чи100та"</li>
+                                        <li>Провела 15+ конференций, самая крупная из которых на 15.000 человек</li>
+                                        <li>Ведущая радио МЛМ 2024 и Сетевого Оскара</li>
+                                        <li>Провела рекордные 150+ интервью с успешными сетевиками</li>
+                                        <li>Тренер по голосу, речи и публичным выступлениям</li>
+                                        <li>Автор курса ГОЛОС НА МИЛЛИОН С ЕЛЕНОЙ ЕЩЕНКО</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="speakers-row animate-on-scroll animate-delay-4">
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Мирлан-Батырханов.png" alt="Спикер 5" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Мирлан Батырханов</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>16 лет в предпринимательстве</li>
+                                        <li>12 лет в МЛМ бизнесе</li>
+                                        <li>Структура в 9 странах</li>
+                                        <li>Чек номер 1 в своей стране и в своей компании</li>
+                                        <li>350 000+ контрактов за 3 года</li>
+                                        <li>Товарооборот ~ 1,5 млн. долл. США в месяц</li>
+                                        <li>Обладатель награды «МЛМ Оскар», в номинации «самая влиятельная семейная пара»</li>
+                                        <li>Самый большой бонус в компании за рост лидеров в структуре</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Алиса-Кузьминых.png" alt="Спикер 5" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Алиса Кузьминых</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>ТОП-лидер сетевой компании</li>
+                                        <li>Лучший результат в доходах за год - 100 000$</li>
+                                        <li>Создатель своей онлайн школы «СТРАХИ ПРОДАЖИ»</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="speakers-row animate-on-scroll animate-delay-4">
+                    <div class="speaker-card animate-scale animate-delay-2">
+                        <div class="speaker-content">
+                            <img src="img/speaker/Роман-Петренко.png" alt="Спикер 5" class="speaker-image">
+                            <div class="speaker-info">
+                                <h3 class="speaker-name">Роман Петренко</h3>
+                                <div class="card-description-speaker">
+                                    <ul class="description-list-speaker">
+                                        <li>Автор методики ТЕЙВО (TEIVO) — инновационного инструмента для лидеров.</li>
+                                        <li>29 лет в сетевом маркетинге</li>
+                                        <li>Основатель Ассоциации профессионалов сетевого бизнеса (2001–2009)</li>
+                                        <li>Соавтор Системы "12 шагов к Успеху"—  120,000+ сетевиков внедрили её в свой бизнес.</li>
+                                        <li>Разработчик МЛМ-компаний (1999–2024) — эксперт, знающий МЛМ на молекулярном уровне.</li>
+                                        <li>Создатель культового тренинга «Денежный оргазм» — покорившего сердца сетевиков в 14 странах.</li>
+                                        <li>Автор книги: «PR в сетевом маркетинге» (2007)</li>
+                                        <li>Заказчик тренингов и издатель книг Тома Шрайтера (Большой Эл): «Секретный язык привлечения» (2005), «26 гениальных идей для построения вашего бизнеса» (2006)</li>
+                                        <li>Организатор тренинга Рэнди Гейджа в России "Nation Duplication" (2006)</li>
+                                        <li>Творец более 70 программ и курсов — от инструментов рекрутинга до управления многотысячными командами.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Section -->
+    <section class="program-section animate-on-scroll" id="program">
+        <div class="container">
+            <h2 class="program-title animate-fade-left">Программа конференции</h2>
+            <p class="program-description animate-fade-left animate-delay-1">Смотрите, слушайте и внедряйте</p>
+
+            <div class="program-date-container animate-on-scroll animate-delay-2">
+                <div class="program-date animate-scale animate-delay-3">
+                    <span class="date-text">17 ноября, понедельник</span>
+                </div>
+            </div>
+
+            <div class="program-schedule animate-on-scroll animate-delay-4">
+                <div class="speaker-slot animate-fade-left animate-delay-1">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Артём и Ольга Яровые</div>
+                        <div class="speaker-topic">Как повысить выживаемость партнёров и ускорить дубликацию</div>
+                    </div>
+                    <div class="speaker-time">16:00 — 16:55</div>
+                </div>
+
+                <div class="speaker-slot animate-fade-left animate-delay-2">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Ольга Бутакова</div>
+                        <div class="speaker-topic">Глобальная экспансия. Как построить МЛМ компанию в других странах</div>
+                    </div>
+                    <div class="speaker-time">17:00 — 17:55</div>
+                </div>
+
+                <div class="speaker-slot animate-fade-left animate-delay-3">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Оксана Смирнова</div>
+                        <div class="speaker-topic">Как я построила систему марафонов, которая делает x2 в обороте и объединяет 10 000+ партнёров</div>
+                    </div>
+                    <div class="speaker-time">18:00 — 18:55</div>
+                </div>
+
+                <div class="speaker-slot animate-fade-left animate-delay-4">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Станислав Санников</div>
+                        <div class="speaker-topic">5 ошибок работы с клиентскими чатами. Как правильно приглашать людей в клиенсткие чаты</div>
+                    </div>
+                    <div class="speaker-time">19:00 — 20:25</div>
+                </div>
+            </div>
+
+            <div class="program-date-container animate-on-scroll animate-delay-2">
+                <div class="program-date animate-scale animate-delay-3">
+                    <span class="date-text">18 ноября, вторник</span>
+                </div>
+            </div>
+
+            <div class="program-schedule animate-on-scroll animate-delay-4">
+                <div class="speaker-slot animate-fade-left animate-delay-1">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Гульшат Мустафина</div>
+                        <div class="speaker-topic">Система запуска новичков: от старта к результату</div>
+                    </div>
+                    <div class="speaker-time">16:00 — 16:55</div>
+                </div>
+
+                <div class="speaker-slot animate-fade-left animate-delay-2">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Юлия Лелеко</div>
+                        <div class="speaker-topic">ИИ и автоворонки. Как я регулярно получаю 10 заявок в команду, работая пару часов в день</div>
+                    </div>
+                    <div class="speaker-time">17:00 — 17:55</div>
+                </div>
+
+                <div class="speaker-slot animate-fade-left animate-delay-3">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Алексей Бабинцев</div>
+                        <div class="speaker-topic">Как заработать 50 тыс в месяц и 1 млн в месяц в сетевом!</div>
+                    </div>
+                    <div class="speaker-time">18:00 — 18:55</div>
+                </div>
+
+                <div class="speaker-slot animate-fade-left animate-delay-4">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Алексей Шубин</div>
+                        <div class="speaker-topic">Как рекрутировать от 30 человек ежемесячно с помощью Телеграм и ИИ</div>
+                    </div>
+                    <div class="speaker-time">19:00 — 20:25</div>
+                </div>
+            </div>
+
+            <div class="program-date-container animate-on-scroll animate-delay-2">
+                <div class="program-date animate-scale animate-delay-3">
+                    <span class="date-text">19 ноября, среда</span>
+                </div>
+            </div>
+
+            <div class="program-schedule animate-on-scroll animate-delay-4">
+                <div class="speaker-slot animate-fade-left animate-delay-1">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Елена Ещенко</div>
+                        <div class="speaker-topic">Как перестать быть “никому не известным” и включить медийность </div>
+                    </div>
+                    <div class="speaker-time">15:30 — 16:55</div>
+                </div>
+                <div class="speaker-slot animate-fade-left animate-delay-1">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Сергей Всехсвятский</div>
+                        <div class="speaker-topic">От одного до ... бесконечности? Количество касаний в современном рекрутинге</div>
+                    </div>
+                    <div class="speaker-time">17:00 — 17:55</div>
+                </div>
+
+                <div class="speaker-slot animate-fade-left animate-delay-2">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Мирлан Батырханов</div>
+                        <div class="speaker-topic">Как начать действовать, победить прокрастинацию, используя НЛП</div>
+                    </div>
+                    <div class="speaker-time">18:00 — 18:55</div>
+                </div>
+
+                <div class="speaker-slot animate-fade-left animate-delay-3">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Александр Скиба</div>
+                        <div class="speaker-topic">Нейросети в Клиентском чате. Усиливаем продажи и Рекрутирование</div>
+                    </div>
+                    <div class="speaker-time">19:00 — 20:25</div>
+                </div>
+            </div>
+
+            <div class="program-date-container animate-on-scroll animate-delay-2">
+                <div class="program-date animate-scale animate-delay-3">
+                    <span class="date-text">20 ноября, четверг</span>
+                </div>
+            </div>
+
+            <div class="program-schedule animate-on-scroll animate-delay-4">
+
+                <div class="speaker-slot animate-fade-left animate-delay-1">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Роман Петренко</div>
+                        <div class="speaker-topic">КОНТР-РЕКРУТИНГ. Как рекрутировать тех, кто пытается рекрутировать вас</div>
+                    </div>
+                    <div class="speaker-time">15:00 — 15:55</div>
+                </div>
+
+                <div class="speaker-slot animate-fade-left animate-delay-1">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Алтынай Капалбаева</div>
+                        <div class="speaker-topic">Лидеры по психотипу:как перестать тащить всех и включить их силу</div>
+                    </div>
+                    <div class="speaker-time">16:00 — 16:55</div>
+                </div>
+
+                <div class="speaker-slot animate-fade-left animate-delay-2">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Вера Ориенс</div>
+                        <div class="speaker-topic">Магия достижения целей: закройте 3 главные цели за год!</div>
+                    </div>
+                    <div class="speaker-time">17:00 — 18:30</div>
+                </div>
+
+                <div class="speaker-slot animate-fade-left animate-delay-3">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Всеволод Татаринов</div>
+                        <div class="speaker-topic">Как, работая с Ядром Личности, резко увеличить свои доходы</div>
+                    </div>
+                    <div class="speaker-time">18:35 — 20:00</div>
+                </div>
+
+                <div class="speaker-slot animate-fade-left animate-delay-4">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Евгений Щелконогов</div>
+                        <div class="speaker-topic">Главные факторы успеха в МЛМ бизнесе. *Не продукт, не компания и не маркетинговый план. </div>
+                    </div>
+                    <div class="speaker-time">20:05 — 21:30</div>
+                </div>
+            </div>
+
+            <div class="program-date-container animate-on-scroll animate-delay-2">
+                <div class="program-date animate-scale animate-delay-3">
+                    <span class="date-text">21 ноября, пятница</span>
+                </div>
+            </div>
+
+            <div class="program-schedule animate-on-scroll animate-delay-4">
+                <div class="speaker-slot animate-fade-left animate-delay-1">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Алиса Кузьминых</div>
+                        <div class="speaker-topic">Активация новичка за 3 месяца. Как закрыть лидерскую квалификацию и вырастить лидера в сетевом</div>
+                    </div>
+                    <div class="speaker-time">16:00 — 16:55</div>
+                </div>
+
+                <div class="speaker-slot animate-fade-left animate-delay-1">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Валентин Войнов</div>
+                        <div class="speaker-topic">Фабрика инновационных решений как реакция на тренды</div>
+                    </div>
+                    <div class="speaker-time">17:00 — 17:55</div>
+                </div>
+
+                <div class="speaker-slot animate-fade-left animate-delay-2">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Варлам Григорян</div>
+                        <div class="speaker-topic">Талант сетевика. Разбиваем мифы, чтобы поверить в себя</div>
+                    </div>
+                    <div class="speaker-time">18:00 — 18:55</div>
+                </div>
+
+                <div class="speaker-slot animate-fade-left animate-delay-3">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Татьяна Дитман</div>
+                        <div class="speaker-topic">Финансовое здоровье 2.0</div>
+                    </div>
+                    <div class="speaker-time">19:00 — 19:55</div>
+                </div>
+
+                <div class="speaker-slot animate-fade-left animate-delay-4">
+                    <div class="speaker-info">
+                        <div class="speaker-name name_2">Антон Агафонов</div>
+                        <div class="speaker-topic">7 триггеров психологии влияния по-русски. Что работает у "них" и не работает у "нас"</div>
+                    </div>
+                    <div class="speaker-time">20:00 — 21:25</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+        <button class="btn btn-primary"><span class="text-primary-btn">Участвовать бесплатно</span></button>
+        <button class="btn btn-secondary">Купить записи</button>
+    </div>
+    <div class="container-btn">
+        <h2 class="price-title program-title animate-fade-left">Нам всем хочется снова чувствовать уверенность — <br>что мы идём в ногу со временем.</h2>
+        <h2 class="price-title h2-title-price program-title animate-fade-left txt-area">На этой конференции вы поймёте, как использовать ИИ <br>без страха, просто и с удовольствием.</h2>
+        <!-- Free Participation Button Before Pricing -->
+        <div class="free-participation-container" style="margin: 40px auto; max-width: 600px; text-align: center;">
+                <button class="btn-black">Участвовать бесплатно</button>
+        </div>
+    </div>
+<!-- Pricing Cards Section -->
+<section class="pricing-section animate-on-scroll">
+    <div class="club-container-full">
+        <div class="club-card">
+            <div class="club-package-badge">
+                <h2 class="club-title">Пакет CLUB</h2>
+            </div>
+            <div class="card-description">
+                <ul class="description-list">
+                    <li>Доступ к записям интервью со спикерами конференции <span class="text-li">навсегда</span></li>
+                    <li>Доступ к записям конференции <span class="text-li">навсегда</span></li>
+                    <li>Бонусы от спикеров, озвученных на эфирах</li>
+                    <li>Презентации с выступлениями спикеров конференции</li>
+                    <li>Участие в розыгрыше призов конференции</li>
+                    <li>Доступ к записям предыдущих конференций 1.0-9.0 <span class="text-li">навсегда</span></li>
+                    <li>Доступ в закрытый онлайн-клуб Антона Агафонова "Лидеры MLM" <span class="text-li">на ГОД</span></li>
+                </ul>
+            </div>
+            <div class="pricing-info">
+                <div class="price-badge special-price-badge">
+                    <div class="price-label">Стоимость пакета</div>
+                    <div class="price-value">40 000 р.</div>
+                </div>
+            </div>
+            <button class="card-button" onclick="window.location.href='https://business.antonagafonov.com/mlmrev10/club'">Купить пакет CLUB</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="pricing-cards">
+                <div class="pricing-card standart-card animate-scale animate-delay-1">
+                    <div class="card-image">
+                        <img src="img/standart.png" alt="Пакет Стандарт" class="pricing-img">
+                    </div>
+                    <!-- <h3 class="card-title">«Чтобы просто смотреть и не отставать от технологий»</h3> -->
+                    <div class="card-description">
+                        <ul class="description-list">
+                            <li>Доступ к записям интервью со спикерами конференции <br><span class="text-li">3 месяца</span></li>
+                            <li>Доступ к записям конференции <br><span class="text-li">3 месяца</span></li>
+                            <li>Бонусы от спикеров</li>
+                            <li>Доступ в закрытый клуб Антона Агафонова "Лидеры MLM" <br><span class="text-li">1 месяц</span></li>
+                        </ul>
+                    </div>
+                    <div class="pricing-info">
+                        <div class="price-badge special-price-badge">
+                            <div class="price-label">Стоимость пакета</div>
+                            <div class="price-value">4 990 р.</div>
+                        </div>
+                    </div>
+                    <button class="card-button standard-btn" onclick="window.location.href='https://business.antonagafonov.com/mlmrev10/standard'">Купить записи</button>
+                </div>
+
+                <div class="pricing-card vip-card animate-scale animate-delay-2">
+                    <div class="card-image">
+                        <img src="img/vip.png" alt="Пакет VIP" class="pricing-img">
+                    </div>
+                    <!-- <h3 class="card-title">«Чтобы глубже разобраться и получить поддержку»</h3> -->
+                    <div class="card-description">
+                        <ul class="description-list">
+                            <li>Доступ к записям интервью со спикерами конференции <span class="text-li">12 месяцев</span></li>
+                            <li>Доступ к записям конференции <span class="text-li">12 месяцев</span></li>
+                            <li>Бонусы от спикеров</li>
+                            <li>Доступ в закрытый клуб Антона Агафонова "Лидеры MLM" <br><span class="text-li">2 месяца</span></li>
+                            <li>Участие в розыгрыше главных призов конференции</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-info">
+                        <div class="price-badge special-price-badge">
+                            <div class="price-label">Стоимость пакета</div>
+                            <div class="price-value">7 990 р.</div>
+                        </div>
+                    </div>
+                    <button class="card-button" onclick="window.location.href='https://business.antonagafonov.com/mlmrev10/vip'">Купить записи</button>
+                </div>
+
+                <div class="pricing-card platinum-card animate-scale animate-delay-3">
+                    <div class="card-image">
+                        <img src="img/Platinum.png" alt="Пакет Platinum" class="pricing-img">
+                    </div>
+                    <!-- <h3 class="card-title">«Чтобы не просто учиться, а зарабатывать вместе»</h3> -->
+                    <div class="card-description">
+                        <ul class="description-list">
+                            <li>Доступ к записям интервью со спикерами конференции <span class="text-li">навсегда</span></li>
+                            <li>Доступ к записям конференции <span class="text-li">навсегда</span></li>
+                            <li>Бонусы от спикеров</li>
+                            <li>Доступ в закрытый клуб Антона Агафонова "Лидеры MLM" <br><span class="text-li">3 месяца</span></li>
+                            <li><span class="text-li">Презентации с выступления спикеров конференции</span></li>
+                            <li>Доступ к записям предыдущих конференций: 1.0 - 9.0 <span class="text-li">навсегда</span></li>
+                            <li>Участие в розыгрыше главных призов конференции</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-info">
+                        <div class="price-badge special-price-badge">
+                            <div class="price-label">Стоимость пакета</div>
+                            <div class="price-value">15 000 р.</div>
+                        </div>
+                    </div>
+                    <button class="platunum-btn card-button" onclick="window.location.href='https://business.antonagafonov.com/mlmrev10/platinum'">Купить записи</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Organizer Section -->
+        <section class="organizer-section animate-on-scroll">
+            <div class="container">
+                <h2 class="organizer-title animate-fade-left">Организатор конференции</h2>
+                <div class="organizer-card-container animate-on-scroll animate-delay-2">
+                    <div class="organizer-card animate-scale animate-delay-3">
+                        <h3 class="organizer-name">Антон Агафонов</h3>
+                        <div class="organizer-profile">
+                            <div class="organizer-photo">
+                                <img src="img/Антон.png" alt="Антон Агафонов" class="organizer-image">
+                            </div>
+                            <div class="organizer-info">
+                                <div class="organizer-description">
+                                    <p class="organizer-main-description">Предприниматель, инвестор, бизнес-ментор</p>
+                                    <p class="organizer-achievement">Построил клиентскую сеть больше 2.000.000 человек</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="organizer-achievements">
+                            <ul class="achievements-list">
+                                <li>Совладелец IT стартапов</li>
+                                <li>Опыт в бизнесе: 30 лет</li>
+                                <li>5 лет корпоративного опыта, совладелец и вице-президент сетевой компании</li>
+                                <li>Опыт в интернет-бизнесе: 25 лет</li>
+                                <li>Организатор онлайн-конференций на 10.000+ человек</li>
+                                <li>Основатель передачи и журнала «Время MLM»</li>
+                                <li>Автор книги-бестселлера «Секреты рекрутирования в интернете»</li>
+                                <li>Обладатель MLM-оскара «Сетевик десятилетия»</li>
+                                <li>Участник клуба топовых бизнес-тренеров «Инфоэлита»</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Slider Section -->
+        <section class="testimonials-section animate-on-scroll">
+            <div class="container">
+                <h2 class="testimonials-title animate-fade-left">Отзывы участников</h2>
+                <div class="testimonials-slider animate-on-scroll animate-delay-2">
+                    <div class="testimonials-container">
+                        <button class="testimonial-nav-btn testimonial-prev-btn" id="prevBtn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 18L9 12L15 6" stroke="#2F2D2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-image">
+                                <img src="img/отзыв-1.png" alt="Отзыв участника" id="testimonialImg">
+                            </div>
+                        </div>
+
+                        <button class="testimonial-nav-btn testimonial-next-btn" id="nextBtn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 18L15 12L9 6" stroke="#2F2D2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="testimonial-indicators">
+                        <button class="indicator active" data-slide="0"></button>
+                        <button class="indicator" data-slide="1"></button>
+                        <button class="indicator" data-slide="2"></button>
+                        <button class="indicator" data-slide="3"></button>
+                        <button class="indicator" data-slide="4"></button>
+                        <button class="indicator" data-slide="5"></button>
+                        <button class="indicator" data-slide="6"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section animate-on-scroll">
+        <div class="container">
+            <h2 class="faq-title animate-fade-left">Часто задаваемые вопросы</h2>
+
+            <div class="faq-container animate-on-scroll animate-delay-2">
+                <div class="faq-item animate-scale animate-delay-1">
+                    <div class="faq-question">
+                        <h3>Где и в каком формате пройдёт конференция?</h3>
+                        <div class="faq-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 9L12 15L18 9" stroke="#2F2D2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Конференция проходит в Телеграм-чате МЛМ РЕВОЛЮЦИЯ, в режиме прямой онлайн-трансляции. Благодаря этому принять участие могут все желающие из любой точки мира, где есть доступ к интернету.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item animate-scale animate-delay-2">
+                    <div class="faq-question">
+                        <h3>Будут записи выступлений?</h3>
+                        <div class="faq-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 9L12 15L18 9" stroke="#2F2D2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Да, уже сейчас вы можете купить записи выступлений. С 1 декабря 2025 года они будут доступны в личном кабинете на образовательной платформе Prodamus XL. Письмо с доступом к записям на 12 месяцев и навсегда, в зависимости от тарифа, будет отправлено вам на электронную почту после оплаты. Проверяйте, пожалуйста, все папки, включая спам.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item animate-scale animate-delay-3">
+                    <div class="faq-question">
+                        <h3>Как стать спикером конференции?</h3>
+                        <div class="faq-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 9L12 15L18 9" stroke="#2F2D2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Всех спикеров и программу мы утверждаем заранее. Приглашаем только тех, кого знаем лично. Как правило, это ведущие эксперты и практики. Благодаря этому на конференции нет «воды» и «цыганщины». Если вы хотите выступить на следующей конференции — отправьте нам информацию о себе в Телеграм <a href="https://t.me/antonsupport_bot" target="_blank">https://t.me/antonsupport_bot</a>. Мы вас обязательно заметим и рассмотрим.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p class="footer-text">ИП АГАФОНОВ АНТОН ВАСИЛЬЕВИЧ ©2024</p>
+                    <p class="footer-text">ИНН 165500391828</p>
+                </div>
+                <div class="footer-links">
+                    <a href="privacy-policy.html" class="footer-link">Политика конфиденциальности</a>
+                    <a href="oferta.html" class="footer-link">Договор публичной оферты</a>
+                    <a href="consent.html" class="footer-link">Согласие на обработку персональных данных</a>
+                    <a href="advertising-consent.html" class="footer-link">Согласие на получение информационных и рекламных материалов</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
