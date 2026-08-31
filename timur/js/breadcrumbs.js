@@ -3,7 +3,6 @@
 
   var SITE_LABELS = {
     timur: 'Ремонт квартир',
-    mlm: 'МЛМ Революция 10.0',
     'gloris-beauty': 'Салон красоты',
     'custom-cars': 'Детейлинг-центр',
   };
@@ -20,15 +19,6 @@
     'privacy-policy.html': 'Политика конфиденциальности',
     'cookie-policy.html': 'Политика файлов cookie',
     'user-agreement.html': 'Пользовательское соглашение',
-    'registration.html': 'Регистрация',
-    'tariffs.html': 'Тарифы',
-    'thank-you.html': 'Спасибо',
-    'oferta.html': 'Оферта',
-    'consent.html': 'Согласие на обработку данных',
-    'advertising-consent.html': 'Рекламная рассылка',
-    'platinum-success.html': 'Оплата Platinum',
-    'vip-success.html': 'Оплата VIP',
-    'records-success.html': 'Оплата записей',
   };
 
   var FOLDER_LABELS = {
@@ -54,7 +44,7 @@
     complexes: 'Комплексы',
   };
 
-  var SITE_FOLDERS = ['timur', 'mlm', 'gloris-beauty', 'custom-cars'];
+  var SITE_FOLDERS = ['timur', 'gloris-beauty', 'custom-cars'];
 
   function slugToTitle(slug) {
     return slug.replace(/\.html$/i, '').replace(/[-_]+/g, ' ');

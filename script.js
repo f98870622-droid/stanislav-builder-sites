@@ -55,7 +55,7 @@ document.addEventListener("hero-enter-complete", () => {
 
 const TELEGRAM_USERNAME = "stanislav5621";
 const TELEGRAM_START_MESSAGE =
-  "Станислав, здравствуйте! Нужен лендинг для курса / МЛМ / ивента. Посмотрите, с чего лучше начать.";
+  "Станислав, здравствуйте! Хочу сайт для строительных или ремонтных услуг. Посмотрите мою задачу и подскажите, с чего начать.";
 
 const buildTelegramLink = (text = TELEGRAM_START_MESSAGE) =>
   `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(text)}`;
